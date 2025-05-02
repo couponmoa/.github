@@ -80,5 +80,9 @@
 ---
 ## 🗺️ AWS 인프라 아키텍처
 ![인프라 아키텍처 이미지](./images/AWS_infra_architecture.png)
-> 아키텍처 구성 요소
-> 네트워크
+<details>
+  <summery>아키텍처 구성 요소</summery>
+  - fasdfads
+  - fdsafasd
+  - fdsafasd
+</details>
