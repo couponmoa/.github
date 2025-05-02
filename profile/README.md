@@ -40,7 +40,7 @@
     </td>
         <td width="200" align="center" valign="top">
       <img src="https://your-image-url.com/kim.jpg" width="100%" style="border-radius:10px;"><br/>
-      <b>권호</b><br/>
+      <b>권호준</b><br/>
       <span style="color: blue;">💡 팀원</span><br/><br/>
       📌 쿠폰 CRUD 구현<br/>
       📌 모니터링 툴 세팅<br/>
