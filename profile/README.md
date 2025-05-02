@@ -13,7 +13,7 @@
       📌 Store Service 분리
     </td>
     <td width="200" align="center" valign="top">
-      <img src="https://your-image-url.com/oh.jpg" width="100%" style="border-radius:10px;"><br/>
+      <img src="./images/profile_myeongje.jpg" width="100%" style="border-radius:10px;"><br/>
       <b>오명제</b><br/>
       <span style="color: red;">🧱 부팀장</span><br/><br/>
       📌 가게 CRUD 구현<br/>
@@ -30,7 +30,7 @@
       📌 Terraform 기반 인프라 구성
     </td>
     <td width="200" align="center" valign="top">
-      <img src="https://your-image-url.com/kim.jpg" width="100%" style="border-radius:10px;"><br/>
+      <img src="./images/profile_boyeon.jpg" width="100%" style="border-radius:10px;"><br/>
       <b>이보연</b><br/>
       <span style="color: blue;">💡 팀원</span><br/><br/>
       📌 쿠폰 발급 및 발급 내역 관리 기능 구현<br/>
@@ -38,8 +38,8 @@
       📌 쿠폰 사용량 집계 배치 작업 구현<br/>
       📌 Notification Service 분리
     </td>
-        <td width="200" align="center" valign="top">
-      <img src="https://your-image-url.com/kim.jpg" width="100%" style="border-radius:10px;"><br/>
+      <td width="200" align="center" valign="top">
+      <img src="./images/profile_hojun.jpg" width="100%" style="border-radius:10px;"><br/>
       <b>권호준</b><br/>
       <span style="color: blue;">💡 팀원</span><br/><br/>
       📌 쿠폰 CRUD 구현<br/>
