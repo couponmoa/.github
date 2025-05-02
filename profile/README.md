@@ -58,7 +58,7 @@
 👤 **사업자용 기능**
 
 <div style="border:1px solid #ddd; border-radius:6px; padding:12px; margin:10px 0;">
-  <b>👤 **사업자용 기능**</b>
+  <b>👤 사업자용 기능</b>
   <ul>
     <li>가게 등록 / 수정 / 삭제</li>
     <li>쿠폰 발행</li>
