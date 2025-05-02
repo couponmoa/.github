@@ -50,7 +50,18 @@
   </tr>
 </table>
 
-### 🔁 서비스 플로우
+## 🔁 서비스 플로우
 
 ![서비스플로우 이미지](./images/service_flow.png)
 
+## 🔥 주요 기능
+👤 **사업자용 기능**
+
+<div style="border:1px solid #ddd; border-radius:6px; padding:12px; margin:10px 0;">
+  <b>👤 **사업자용 기능**</b>
+  <ul>
+    <li>가게 등록 / 수정 / 삭제</li>
+    <li>쿠폰 발행</li>
+    <li>쿠폰 사용량 통계 조회</li>
+  </ul>
+</div>
