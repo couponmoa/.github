@@ -4,7 +4,7 @@
 <table>
   <tr>
     <td width="200" align="center" valign="top">
-      <img src="./images/profile_sejin.jpg" width="100" style="border-radius:10px;"><br/>
+      <img src="./images/profile_sejin.jpg" width="100%" style="border-radius:10px;"><br/>
       <b>박세진</b><br/>
       <span style="color: orange;">🪪 팀장</span><br/><br/>
       📌 가게 및 쿠폰 구독 기능 구현<br/>
@@ -13,7 +13,7 @@
       📌 Store Service 분리
     </td>
     <td width="200" align="center" valign="top">
-      <img src="https://your-image-url.com/oh.jpg" width="100" style="border-radius:10px;"><br/>
+      <img src="https://your-image-url.com/oh.jpg" width="100%" style="border-radius:10px;"><br/>
       <b>오명제</b><br/>
       <span style="color: red;">🧱 부팀장</span><br/><br/>
       📌 가게 CRUD 구현<br/>
@@ -21,7 +21,7 @@
       📌 AI 추천 기능 구현
     </td>
     <td width="200" align="center" valign="top">
-      <img src="./images/profile_nayeon.png" width="100" style="border-radius:10px;"><br/>
+      <img src="./images/profile_nayeon.png" width="100%" style="border-radius:10px;"><br/>
       <b>김나연</b><br/>
       <span style="color: blue;">💡 팀원</span><br/><br/>
       📌 사용자 CRUD 및 인증 / 인가 구현<br/>
@@ -30,7 +30,7 @@
       📌 Terraform 기반 인프라 구성
     </td>
     <td width="200" align="center" valign="top">
-      <img src="https://your-image-url.com/kim.jpg" width="100" style="border-radius:10px;"><br/>
+      <img src="https://your-image-url.com/kim.jpg" width="100%" style="border-radius:10px;"><br/>
       <b>이보연</b><br/>
       <span style="color: blue;">💡 팀원</span><br/><br/>
       📌 쿠폰 발급 및 발급 내역 관리 기능 구현<br/>
@@ -39,7 +39,7 @@
       📌 Notification Service 분리
     </td>
         <td width="200" align="center" valign="top">
-      <img src="https://your-image-url.com/kim.jpg" width="100" style="border-radius:10px;"><br/>
+      <img src="https://your-image-url.com/kim.jpg" width="100%" style="border-radius:10px;"><br/>
       <b>권호</b><br/>
       <span style="color: blue;">💡 팀원</span><br/><br/>
       📌 쿠폰 CRUD 구현<br/>
