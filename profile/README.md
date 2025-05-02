@@ -49,6 +49,8 @@
     </td>
   </tr>
 </table>
+
 ### 🔁 서비스 플로우
+
 ![서비스플로우 이미지](./images/service_flow.png)
 
