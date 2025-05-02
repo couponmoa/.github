@@ -1,1 +1,1 @@
-![배너 이미지](profile/couponmoa_banner.png)
+![배너 이미지](profile/images/couponmoa_banner.png)
