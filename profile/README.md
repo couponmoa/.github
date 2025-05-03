@@ -243,7 +243,7 @@
 
 <details>
   <summary><strong>v3 (MSA 설계 후)</strong></summary><br/>
-
+  
   ### 📌 user service  
   <img src="./images/ERD_v3_user.png" width="300">
 
@@ -258,3 +258,70 @@
 
 </details>
 
+---
+
+# 6 🧐 기술적 의사 결정
+
+<details>
+  <summary>🏃 [비동기 처리] 쿠폰 만료 알림 비동기 처리</summary>
+</details>
+
+<details>
+  <summary>🏃 [동시성 제어] 쿠폰 발급 시 동시성 제어 전략 비교</summary>
+</details>
+
+<details>
+  <summary>🏃 [비동기 처리] 구독 시 신규 쿠폰 알림 비동기 처리</summary>
+</details>
+
+<details>
+  <summary>🏃 [AI 활용] AI를 활용한 개인화 쿠폰 추천 시스템</summary>
+</details>
+
+<details>
+  <summary>🏃 [Architecture] MSA 구조화 및 배포</summary>
+</details>
+
+<details>
+  <summary>🏃 [API 문서화] Spring REST Docs 도입</summary>
+</details>
+
+<details>
+  <summary>🏃 [인프라 전략] IaC 기반 클라우드 인프라 구성 배경</summary>
+</details>
+
+---
+
+# 7. ⚡ 성능 비교
+
+<details>
+  <summary>🏃 [WebFlux] SSE 알림에서 MVC와 WebFlux 방식 성능 비교</summary>
+</details>
+
+<details>
+  <summary>🏃 [CloudFront] 이미지 조회 시 S3, CloudFront 성능 비교</summary>
+</details>
+
+<details>
+  <summary>🏃 [Spring Batch] 쿠폰 사용량 집계 작업의 성능 개선기</summary>
+</details>
+
+<details>
+  <summary>🏃 [gRPC] 서버간 gRPC vs REST 통신 방식 성능 비교 </summary>
+</details>
+
+<details>
+  <summary>🏃 [ElasticSearch] 쿠폰 검색 기능 DB, ElasticSearch 성능 비교</summary>
+</details>
+
+---
+
+# 8. 🚨 트러블슈팅
+
+<details>
+  <summary>🎯 Spring 애플리케이션에서 Fargate Task Role 인식 실패 문제 해결</summary>
+</details>
+
+<details>
+  <summary>🎯 ECS 배포 시 오토스케일링 문제</summary>
+</details>
