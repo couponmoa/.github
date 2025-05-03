@@ -776,22 +776,22 @@ ouponmoa는 사용자 맞춤형 쿠폰 추천을 통해 쇼핑 경험을 향상�
 
 ---
 
-- 도메인별 기능 세분화
-  ![기술적 의사 결정 - MSA 이미지 1](./images/technical_decision_making_MSA_1.png)
-  - 쿠폰 도메인 / ai 도메인 / 스토어 도메인 / 유저 도메인 / 알림 도메인 / gateway / 스케줄링
-  - 각 기능별로 레포지토리 세분화
+### 도메인별 기능 세분화
+![기술적 의사 결정 - MSA 이미지 1](./images/technical_decision_making_MSA_1.png)
+- 쿠폰 도메인 / ai 도메인 / 스토어 도메인 / 유저 도메인 / 알림 도메인 / gateway / 스케줄링
+- 각 기능별로 레포지토리 세분화
 
-- Terraform을 통한 인프라 구성
-  ![기술적 의사 결정 - MSA 이미지 2](./images/technical_decision_making_MSA_2.png)
-  - Terraform을 통한 인프라 자동화
+### Terraform을 통한 인프라 구성
+![기술적 의사 결정 - MSA 이미지 2](./images/technical_decision_making_MSA_2.png)
+- Terraform을 통한 인프라 자동화
 
-- 구성된 인프라를 기반으로 ECS에 애플리케이션 배포
-  ![기술적 의사 결정 - MSA 이미지 3](./images/technical_decision_making_MSA_3.png)
-  - 배포 파이프 라인을 통해 각 ECS 에 스프링 애플리케이션 배포
+### 구성된 인프라를 기반으로 ECS에 애플리케이션 배포
+![기술적 의사 결정 - MSA 이미지 3](./images/technical_decision_making_MSA_3.png)
+- 배포 파이프 라인을 통해 각 ECS 에 스프링 애플리케이션 배포
 
-- gRPC를 통한 서버간 통신
-  ![기술적 의사 결정 - MSA 이미지 4](./images/technical_decision_making_MSA_4.png)
-  - 각 서버에 통신할 grpc 명세가 담긴 .proto 파일 공유
+### gRPC를 통한 서버간 통신
+![기술적 의사 결정 - MSA 이미지 4](./images/technical_decision_making_MSA_4.png)
+- 각 서버에 통신할 grpc 명세가 담긴 .proto 파일 공유
 
 ### 4️⃣ 결과
 
