@@ -335,7 +335,8 @@
 <td valign="top" width="45%">
 
 <b>💻 Language</b><br/>
-• Java<br/><br/>
+<img src="https://github.com/user-attachments/assets/7f579478-f27c-4218-882b-4eb8bc302b32" width="20">
+Java<br/><br/>
 
 <b>🔧 Backend</b><br/>
 • Spring<br/>
@@ -378,7 +379,6 @@
 
 <b>🧠 IDE</b><br/>
 • IntelliJ IDEA<br/><br/>
-<img src="https://github.com/user-attachments/assets/7f579478-f27c-4218-882b-4eb8bc302b32"><br/>
 
 <b>🔐 Security</b><br/>
 • JWT<br/>
