@@ -396,7 +396,6 @@
         JMeter
         <img src="https://github.com/user-attachments/assets/98e4eb26-b4e8-4214-8824-3db03e9f0af5" width="20">
         K6<br/>
-      <hr style="margin:4px 0;"/>
     </td>
     <td valign="top">
       <b>🌐 IDE</b><br/><br/>
@@ -464,7 +463,6 @@
         AWS IAM<br/>
         <img src="https://github.com/user-attachments/assets/6097a120-c893-4f57-8617-3e4a4defd257" width="20">
         AWS Certificate Manager<br/>
-      <hr style="margin:4px 0;"/>
     </td>
   </tr>
 </table>
