@@ -233,16 +233,17 @@
 
 <details>
   <summary><strong>v1(초반 설계)</strong></summary>
+  <img src="./images/ERD_v1.png">
 </details>
 
 <details>
   <summary><strong>v2(MSA 설계 전)</strong></summary>
+  <img src="./images/ERD_v2.png">
 </details>
 
 <details>
   <summary><strong>v3(MSA 설계 후)</strong></summary>
-  📌 user service
-  
+  <text>📌 user service</text>
   <img src="./images/ERD_v3_user.png">
 
   📌 store service
