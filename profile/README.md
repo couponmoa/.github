@@ -6,6 +6,7 @@
     <td width="200" align="center" valign="top">
       <img src="./images/profile_sejin.jpg" width="100%" style="border-radius:10px;"><br/>
       <b>박세진</b><br/><br/>
+      <br>
       <span style="color: orange;">🪪 팀장</span><br/>
       📌 가게 및 쿠폰 구독 기능 구현<br/>
       📌 구독 알림 메일 전송 기능 구현<br/>
@@ -15,6 +16,7 @@
     <td width="200" align="center" valign="top">
       <img src="./images/profile_myeongje.jpg" width="100%" style="border-radius:10px;"><br/>
       <b>오명제</b><br/><br/>
+      <br>
       <span style="color: red;">🧱 부팀장</span><br/>
       📌 가게 CRUD 구현<br/>
       📌 ElasticSearch<br/>
@@ -23,6 +25,7 @@
     <td width="200" align="center" valign="top">
       <img src="./images/profile_nayeon.png" width="100%" style="border-radius:10px;"><br/>
       <b>김나연</b><br/><br/>
+      <br>
       <span style="color: blue;">💡 팀원</span><br/>
       📌 사용자 CRUD 및 인증 / 인가 구현<br/>
       📌 쿠폰 만료 및 발급 알림 구현<br/>
@@ -32,6 +35,7 @@
     <td width="200" align="center" valign="top">
       <img src="./images/profile_boyeon.jpg" width="100%" style="border-radius:10px;"><br/>
       <b>이보연</b><br/><br/>
+      <br>
       <span style="color: blue;">💡 팀원</span><br/>
       📌 쿠폰 발급 및 발급 내역 관리 기능 구현<br/>
       📌 쿠폰 발급 시 동시성 제어 구현<br/>
@@ -41,6 +45,7 @@
         <td width="200" align="center" valign="top">
       <img src="./images/profile_hojun.png" width="100%" style="border-radius:10px;"><br/>
       <b>권호준</b><br/><br/>
+      <br>
       <span style="color: blue;">💡 팀원</span><br/>
       📌 쿠폰 CRUD 구현<br/>
       📌 모니터링 툴 세팅<br/>
