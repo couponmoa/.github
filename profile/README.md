@@ -248,8 +248,7 @@
   <img src="./images/ERD_v3_user.png" width="300">
 
   ### 📍 store service  
-  <img src="./images/ERD_v3_store_subscribe.png" width="300">
-  <img src="./images/ERD_v3_store_store.png" width="300">
+  <img src="./images/ERD_v3_store.png" width="300">
 
   ### 🎟️ coupon service  
   <img src="./images/ERD_v3_coupon.png" width="300">
