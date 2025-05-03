@@ -333,19 +333,26 @@
 <table>
   <tr>
     <td valign="top" width="50%">
+
+    <div>
       <b>🧠 Language</b><br/>
         <img src="https://github.com/user-attachments/assets/7f579478-f27c-4218-882b-4eb8bc302b32" width="20">
-        Java<br/><br/>
+        Java
       <hr style="margin:4px 0;"/>
+    <div>
       
       <b>👨‍💻 Backend</b><br/>
-        <img src="https://github.com/user-attachments/assets/9c525a7b-97fa-496e-b6f0-76406da17364" width="20"><br/>Spring<br/>
-        <img src="https://github.com/user-attachments/assets/d903bb42-e1e5-4221-a0a4-6f4bd5b30edd" width="20"><br/>Spring Boot<br/>
-        <img src="https://github.com/user-attachments/assets/d903bb42-e1e5-4221-a0a4-6f4bd5b30edd" width="20"><br/>Spring Data JPA<br/>
-        <img src="https://github.com/user-attachments/assets/6b6bf960-df68-4fac-ba6c-2f932b102fb0" width="20"><br/>Spring WebFlux<br/>
-        <img src="https://github.com/user-attachments/assets/074a6663-6d96-4e39-99cd-db9cf69a8f08" width="20"><br/>QueryDSL<br/>
-      <hr/>
-
+        <img src="https://github.com/user-attachments/assets/9c525a7b-97fa-496e-b6f0-76406da17364" width="20">
+        Spring<br/>
+        <img src="https://github.com/user-attachments/assets/d903bb42-e1e5-4221-a0a4-6f4bd5b30edd" width="20">
+        Spring Boot<br/>
+        <img src="https://github.com/user-attachments/assets/d903bb42-e1e5-4221-a0a4-6f4bd5b30edd" width="20">
+        Spring Data JPA<br/>
+        <img src="https://github.com/user-attachments/assets/6b6bf960-df68-4fac-ba6c-2f932b102fb0" width="20">
+        Spring WebFlux<br/>
+        <img src="https://github.com/user-attachments/assets/074a6663-6d96-4e39-99cd-db9cf69a8f08" width="20">
+        QueryDSL<br/><br/>
+      <hr style="margin:4px 0;"/>
       
       <b>💾 Database</b><br/>
         <img src="https://github.com/user-attachments/assets/60d30203-d078-4c8e-bb2f-ce5ef7f0c8f5" width="20">
