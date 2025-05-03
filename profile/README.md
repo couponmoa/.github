@@ -5,7 +5,7 @@
   <tr>
     <td width="200" align="center" valign="top">
       <img src="./images/profile_sejin.jpg" width="100%" style="border-radius:10px;"><br/>
-      <b>박세진</b><br/>
+      <b>박세진</b><br/><br/>
       <span style="color: orange;">🪪 팀장</span><br/>
       📌 가게 및 쿠폰 구독 기능 구현<br/>
       📌 구독 알림 메일 전송 기능 구현<br/>
@@ -14,7 +14,7 @@
     </td>
     <td width="200" align="center" valign="top">
       <img src="https://your-image-url.com/oh.jpg" width="100%" style="border-radius:10px;"><br/>
-      <b>오명제</b><br/>
+      <b>오명제</b><br/><br/>
       <span style="color: red;">🧱 부팀장</span><br/>
       📌 가게 CRUD 구현<br/>
       📌 ElasticSearch<br/>
@@ -22,7 +22,7 @@
     </td>
     <td width="200" align="center" valign="top">
       <img src="./images/profile_nayeon.png" width="100%" style="border-radius:10px;"><br/>
-      <b>김나연</b><br/>
+      <b>김나연</b><br/><br/>
       <span style="color: blue;">💡 팀원</span><br/>
       📌 사용자 CRUD 및 인증 / 인가 구현<br/>
       📌 쿠폰 만료 및 발급 알림 구현<br/>
@@ -31,7 +31,7 @@
     </td>
     <td width="200" align="center" valign="top">
       <img src="https://your-image-url.com/kim.jpg" width="100%" style="border-radius:10px;"><br/>
-      <b>이보연</b><br/>
+      <b>이보연</b><br/><br/>
       <span style="color: blue;">💡 팀원</span><br/>
       📌 쿠폰 발급 및 발급 내역 관리 기능 구현<br/>
       📌 쿠폰 발급 시 동시성 제어 구현<br/>
@@ -40,7 +40,7 @@
     </td>
         <td width="200" align="center" valign="top">
       <img src="https://your-image-url.com/kim.jpg" width="100%" style="border-radius:10px;"><br/>
-      <b>권호준</b><br/>
+      <b>권호준</b><br/><br/>
       <span style="color: blue;">💡 팀원</span><br/>
       📌 쿠폰 CRUD 구현<br/>
       📌 모니터링 툴 세팅<br/>
@@ -333,11 +333,11 @@
 <table width="100%">
   <tr>
     <td valign="top">
-      <b>🧠 Language</b><br/>
+      <b>🧠 Language</b><br/><br/>
         <img src="https://github.com/user-attachments/assets/7f579478-f27c-4218-882b-4eb8bc302b32" width="20">
         Java<br/>
       <hr style="margin:4px 0;"/>
-      <b>👨‍💻 Backend</b><br/>
+      <b>👨‍💻 Backend</b><br/><br/>
         <img src="https://github.com/user-attachments/assets/9c525a7b-97fa-496e-b6f0-76406da17364" width="20"/>
         Spring<br/>
         <img src="https://github.com/user-attachments/assets/d903bb42-e1e5-4221-a0a4-6f4bd5b30edd" width="20">
@@ -349,7 +349,7 @@
         <img src="https://github.com/user-attachments/assets/074a6663-6d96-4e39-99cd-db9cf69a8f08" width="20">
         QueryDSL<br/>
       <hr style="margin:4px 0;"/>
-      <b>💾 Database</b><br/>
+      <b>💾 Database</b><br/><br/>
         <img src="https://github.com/user-attachments/assets/60d30203-d078-4c8e-bb2f-ce5ef7f0c8f5" width="20">
         MySQL<br/>
         <img src="https://github.com/user-attachments/assets/68df185a-c4bd-42e0-b13d-dc8b2a85fb79" width="20">
@@ -361,11 +361,11 @@
         <img src="https://github.com/user-attachments/assets/06b5d7ad-e6af-4c21-ac05-3b8ea44427fb" width="20">
         AWS RDS<br/>
   <hr style="margin:4px 0;"/>
-      <b>📧 Email</b><br/>
+      <b>📧 Email</b><br/><br/>
         <img src="https://github.com/user-attachments/assets/c3a24ead-982e-443c-affa-8d5b3f10a6f4" width="20">
         JavaMailSender<br/>
       <hr style="margin:4px 0;"/>
-      <b>📈 Monitoring</b><br/>
+      <b>📈 Monitoring</b><br/><br/>
         <img src="https://github.com/user-attachments/assets/592a5e38-ada1-4179-89f3-7827f2008b5d" width="20">
         Spring Actuator<br/>
         <img src="https://github.com/user-attachments/assets/47d7f66a-5d55-44a4-b4b4-e167ba3982fb" width="20">
@@ -375,7 +375,7 @@
         <img src="https://github.com/user-attachments/assets/8f67e9eb-0f56-4717-8606-ad6559fc284a" width="20">
         AWS CloudWatch<br/>
       <hr style="margin:4px 0;"/>
-      <b>👥 Collaboration</b><br/>
+      <b>👥 Collaboration</b><br/><br/>
         <img src="https://github.com/user-attachments/assets/4c2545a7-e860-4633-98c9-0f21de57b642" width="20">
         GitHub<br/>
         <img src="https://github.com/user-attachments/assets/ab197765-c786-4b53-89eb-bb568604f9b1" width="20">
@@ -385,7 +385,7 @@
         <img src="https://github.com/user-attachments/assets/039d9816-7763-48b6-ba1b-443b3a1bfa62" width="20">
         ERD Cloud<br/>
       <hr style="margin:4px 0;"/>
-      <b>🏁 Test</b><br/>
+      <b>🏁 Test</b><br/><br/>
         <img src="https://github.com/user-attachments/assets/11e33ee8-b2a0-4862-a870-4a282de700ab" width="20">
         Spring REST Docs<br/>
         <img src="https://github.com/user-attachments/assets/4b8d9320-1cf4-43e7-9536-0d3a067d200c" width="20">
@@ -399,39 +399,39 @@
       <hr style="margin:4px 0;"/>
     </td>
     <td valign="top">
-      <b>🌐 IDE</b><br/>
+      <b>🌐 IDE</b><br/><br/>
         <img src="https://github.com/user-attachments/assets/b47db86a-ccbc-4985-972f-cab71291c4d5" width="20">
         IntelliJ IDEA<br/>
       <hr style="margin:4px 0;"/>
-      <b>🔐 Security</b><br/>
+      <b>🔐 Security</b><br/><br/>
         <img src="https://github.com/user-attachments/assets/28847a87-77af-431e-8dd4-0e264b341f22" width="20">
         JWT<br/>
         <img src="https://github.com/user-attachments/assets/90f80753-ddb0-4b0c-a39f-db8733faceda" width="20">
         Spring Security<br/>
       <hr style="margin:4px 0;"/>
-      <b>⏰ Batch</b><br/>
+      <b>⏰ Batch</b><br/><br/>
         <img src="https://github.com/user-attachments/assets/32d5c547-0e2e-40ff-9f4c-4367f7a35072" width="20">
         Spring Batch<br/>
       <hr style="margin:4px 0;"/>
-      <b>✉️ Inter-Service Communication</b><br/>
+      <b>✉️ Inter-Service Communication</b><br/><br/>
         <img src="https://github.com/user-attachments/assets/a64f8a72-cbe9-4340-9a32-78db0e3ed970" width="20">
         AWS SQS<br/>
         <img src="https://github.com/user-attachments/assets/6a94ecdd-41a6-4562-8c4e-236757fbd173" width="20">
         gRPC<br/>
       <hr style="margin:4px 0;"/>
-      <b>🤖 AI</b><br/>
+      <b>🤖 AI</b><br/><br/>
         <img src="https://github.com/user-attachments/assets/436ff58c-ae62-457a-bda7-fc012310cc20" width="20">
         Google Gemini API<br/>
         <img src="https://github.com/user-attachments/assets/413a0610-9fc1-4ba4-880b-0fac401e9171" width="20">
         Spring AI<br/>
       <hr style="margin:4px 0;"/>
-      <b>✈️ CI/CD</b><br/>
+      <b>✈️ CI/CD</b><br/><br/>
         <img src="https://github.com/user-attachments/assets/c3e869c7-eb77-4038-9ae4-4f4e47fb6258" width="20">
         GitHub Actions<br/>
         <img src="https://github.com/user-attachments/assets/9ca85329-fd21-4f17-94cb-15b82444c5d6" width="20">
         Docker<br/>
       <hr style="margin:4px 0;"/>
-      <b>☁️ Infra</b><br/>
+      <b>☁️ Infra</b><br/><br/>
         <img src="https://github.com/user-attachments/assets/b84694c3-a527-4c79-9160-88eea4ae07c4" width="20">
         Terraform<br/>
         <img src="https://github.com/user-attachments/assets/6fec3049-6d04-4d0e-a600-e1bca88c426d" width="20">
