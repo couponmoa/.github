@@ -333,8 +333,8 @@
 <table>
 <tr>
 <td valign="top" width="50%">
-
-<b>🧠 Language</b><br/>
+<div style="background-color: #f7f7f7; padding: 6px 12px; border-radius: 6px; font-weight: bold; width: fit-content;">🧠 Language
+</div>
 <img src="https://github.com/user-attachments/assets/7f579478-f27c-4218-882b-4eb8bc302b32" width="20">
 Java<br/><br/>
 
