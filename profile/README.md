@@ -325,3 +325,88 @@
 <details>
   <summary>🎯 ECS 배포 시 오토스케일링 문제</summary>
 </details>
+
+---
+
+<h2>🛠️ 기술 스택</h2>
+
+<table>
+<tr>
+<td valign="top" width="45%">
+
+<b>💻 Language</b><br/>
+• Java<br/><br/>
+
+<b>🔧 Backend</b><br/>
+• Spring<br/>
+• Spring Boot<br/>
+• Spring Data JPA<br/>
+• Spring WebFlux<br/>
+• QueryDSL<br/><br/>
+
+<b>🛢️ Database</b><br/>
+• MySQL<br/>
+• Redis<br/>
+• Elasticsearch<br/>
+• AWS ElastiCache<br/>
+• AWS RDS<br/><br/>
+
+<b>📧 Email</b><br/>
+• JavaMailSender<br/><br/>
+
+<b>📈 Monitoring</b><br/>
+• Spring Actuator<br/>
+• Prometheus<br/>
+• Grafana<br/>
+• AWS CloudWatch<br/><br/>
+
+<b>🤝 Collaboration</b><br/>
+• GitHub<br/>
+• Slack<br/>
+• Notion<br/>
+• K8 Cloud<br/><br/>
+
+<b>🧪 Test</b><br/>
+• Spring REST Docs<br/>
+• Postman<br/>
+• Swagger<br/>
+• K6<br/><br/>
+
+</td>
+
+<td valign="top" width="50%">
+
+<b>🧠 IDE</b><br/>
+• IntelliJ IDEA<br/><br/>
+
+<b>🔐 Security</b><br/>
+• JWT<br/>
+• Spring Security<br/><br/>
+
+<b>🔁 Batch</b><br/>
+• Spring Batch<br/><br/>
+
+<b>📡 Inter-Service Communication</b><br/>
+• AWS SQS<br/>
+• gRPC<br/><br/>
+
+<b>🧠 AI</b><br/>
+• Google Gemini API<br/>
+• Spring AI<br/><br/>
+
+<b>⚙️ CI/CD</b><br/>
+• GitHub Actions<br/>
+• Docker<br/><br/>
+
+<b>🌐 Infra</b><br/>
+• Terraform<br/>
+• AWS ECS, ECR, Fargate, EC2<br/>
+• AWS Route53, S3, ALB<br/>
+• Internet Gateway, NAT Gateway<br/>
+• AWS IAM, Lambda, EventBridge<br/>
+• Cloud Map, Certificate Manager<br/><br/>
+
+</td>
+</tr>
+</table>
+
