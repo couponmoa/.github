@@ -82,11 +82,55 @@
 ![인프라 아키텍처 이미지](./images/AWS_infra_architecture.png)
 
 <details>
-  <summary>아키텍처 구성 요소</summery>
-  <table>
-    <tr>
-      <td>네트워크</td>
-      <td>VPC, Public / Private Subnet, Internet Gateway, NAT Gateway</td>
-    </tr>
-  </table>
+<summary><strong>📦 아키텍처 구성 요소</strong></summary>
+
+<table>
+  <tr>
+    <td><b>네트워크</b></td>
+    <td>VPC, Public / Private Subnet, Internet Gateway, NAT Gateway</td>
+  </tr>
+  <tr>
+    <td><b>트래픽 라우팅</b></td>
+    <td>Route 53, Application Load Balancer (ALB)</td>
+  </tr>
+  <tr>
+    <td><b>컨테이너 오케스트레이션</b></td>
+    <td>ECS + Fargate 기반 마이크로서비스<br/>서비스 디스커버리를 위한 Cloud Map</td>
+  </tr>
+  <tr>
+    <td><b>데이터 계층</b></td>
+    <td>RDS(MySQL), ElastiCache(Redis), EC2 기반 Elasticsearch</td>
+  </tr>
+  <tr>
+    <td><b>정적 리소스 처리</b></td>
+    <td>S3 + CloudFront (이미지 등 정적 자원 처리)</td>
+  </tr>
+  <tr>
+    <td><b>비동기 통신</b></td>
+    <td>Amazon SQS (알림 처리용 메시지 큐)</td>
+  </tr>
+  <tr>
+    <td><b>모니터링 / 알림</b></td>
+    <td>Prometheus, Grafana, CloudWatch, EventBridge, Lambda</td>
+  </tr>
+  <tr>
+    <td><b>CI / CD 및 이미지 저장소</b></td>
+    <td>GitHub Actions → ECR</td>
+  </tr>
+</table>
+
+</details>
+
+<details>
+<summary><strong>🛠️ Terraform 기반 인프라 관리</strong></summary>
+
+### ▪️ Infrastructure as Code (IaC)
+
+- 모든 리소스를 Terraform으로 선언적 관리
+
+### ▪️ 구성 파일 구조
+
+- 기능별 분리:  
+  <code>vpc.tf</code>, <code>ecs.tf</code>, <code>alb.tf</code>, <code>sg.tf</code>, <code>rds.tf</code>, <code>sqs.tf</code>, <code>ecr.tf</code> 등
+
 </details>
