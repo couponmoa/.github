@@ -334,7 +334,7 @@
 <tr>
 <td valign="top" width="50%">
 
-<h2>💻 Language<h2><br/>
+<b>💻 Language<b><br/>
 <img src="https://github.com/user-attachments/assets/7f579478-f27c-4218-882b-4eb8bc302b32" width="20">
 Java<br/><br/>
 
@@ -347,21 +347,22 @@ Spring Boot<br/>
 Spring Data JPA<br/>
 <img src="https://github.com/user-attachments/assets/ca5af6c8-5db2-4f69-873d-ac6156ec650a" width="20">
 Spring WebFlux<br/>
-<img src="https://github.com/user-attachments/assets/" width="20">
+<img src="https://github.com/user-attachments/assets/3983037b-19d0-42f7-a3f4-bfcd2c2772c2" width="20">
 QueryDSL<br/><br/>
-<img src="https://github.com/user-attachments/assets/" width="20">
+<img src="https://github.com/user-attachments/assets/60f48b0e-9808-4fa7-b62b-fdc530a41c64" width="20">
 
 <b>💾 Database</b><br/>
+<img src="https://github.com/user-attachments/assets/60d30203-d078-4c8e-bb2f-ce5ef7f0c8f5" width="20">
 MySQL<br/>
-<img src="https://github.com/user-attachments/assets/" width="20">
+<img src="https://github.com/user-attachments/assets/68df185a-c4bd-42e0-b13d-dc8b2a85fb79" width="20">
 Redis<br/>
-<img src="https://github.com/user-attachments/assets/" width="20">
+<img src="https://github.com/user-attachments/assets/dce85062-cc7f-417b-8c65-68a33b67197a" width="20">
 Elasticsearch<br/>
-<img src="https://github.com/user-attachments/assets/" width="20">
+<img src="https://github.com/user-attachments/assets/a35ff5bf-627e-41cf-9493-cc2f6363a255" width="20">
 AWS ElastiCache<br/>
-<img src="https://github.com/user-attachments/assets/" width="20">
+<img src="https://github.com/user-attachments/assets/06b5d7ad-e6af-4c21-ac05-3b8ea44427fb" width="20">
 AWS RDS<br/><br/>
-<img src="https://github.com/user-attachments/assets/" width="20">
+
 
 <b>📧 Email</b><br/>
 • JavaMailSender<br/><br/>
