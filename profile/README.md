@@ -1341,41 +1341,6 @@ ouponmoa는 사용자 맞춤형 쿠폰 추천을 통해 쇼핑 경험을 향상�
             ```
             
         - 결과
-            
-            import http from 'k6/http';
-            import { check, sleep } from 'k6';
-            
-            export const options = {
-                vus: 100,
-                iterations: 1000,
-                insecureSkipTLSVerify: true, // SSL 인증서 검증 무시
-            };
-            
-            const ACCESS_TOKEN = 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0IiwiZW1haWwiOiJ1c2VyMkBlbWFpbC5jb20iLCJ1c2VyUm9sZSI6IlJPTEVfVVNFUiIsInRva2VuVHlwZSI6ImFjY2VzcyIsImV4cCI6MTc0NTkxNjk3MSwiaWF0IjoxNzQ1OTE1MTcxfQ.8b1SkyIfiNle8g2l9D_irZTZVPz6f3HTOf9pY_6flqwjrGUPA8M6dGe9VQ5Mqron9d6BS6ShkhhmU0WuhN2-_g';
-            
-            export default function () {
-                const headers = {
-                    Authorization: `Bearer ${ACCESS_TOKEN}`,
-                    Host: 'haing.org', // 중요한 포인트: Host 헤더 강제 지정
-                };
-            
-                // 중요한 포인트: IP로 요청 (도메인 대신)
-                const res = http.get('
-            
-            https://haing.org/api/v1/users
-            
-            ', { headers });
-            
-                console.log(`status: ${res.status}`);
-                console.log(`body: ${res.body}`);
-            
-                check(res, {
-                    '회원 조회 성공': (r) => r.status === 200,
-                });
-            
-                sleep(1);
-            }
-            
             ```
             ✓ 회원 조회 성공
                  checks.........................: 100.00% 1000 out of 1000
