@@ -1207,7 +1207,7 @@ ouponmoa는 사용자 맞춤형 쿠폰 추천을 통해 쇼핑 경험을 향상�
 
 ---
 
-1. **파티셔닝 적용 전후 성능 비교**
+4. **파티셔닝 적용 전후 성능 비교**
 - **기존 방식**
     - **단일 스레드**로 전체 데이터를 순차 처리
     - JdbcCursorItemReader 사용 - 커서 기반으로 성능은 좋지만, 멀티 스레드에서 안전하지 않음
@@ -1258,6 +1258,311 @@ ouponmoa는 사용자 맞춤형 쿠폰 추천을 통해 쇼핑 경험을 향상�
 
 <details>
   <summary>🏃 [gRPC] 서버간 gRPC vs REST 통신 방식 성능 비교 </summary>
+
+### 🏃 [gRPC] 서버간 gRPC vs REST 통신 방식 성능 비교
+
+### 1️⃣ 개요
+
+---
+
+- gRPC/ RSET 두 방식간의 성능 비교 테스트에 대한 기록 보드
+- 스토어 서버에서 유저 서버에게 요청을 보낼 때, 그에 대한 응답이 오기까지의 속도를 측정
+
+### 2️⃣ 진행 과정
+
+---
+
+- **테스트 시나리오 작성**
+    - 1. REST 방식으로 요청 응답 속도 측정
+        - k6프로그램을 통해 유저 서버의 `findById()` 를 이용하여 요청을 1000개정도만 보내고, 그에 대한 응답 속도를 구함
+    - 2. gRPC 방식으로 요청 응답 속도 측정
+        - k6를 사용하여 스토어 서버에서 유저 서버에게 요청을 1000개 보낼 때 그에 대한 응답 속도를 구함
+            - 스토어 서버에서 유저 서버의 `findById()` 메서드를 1000번 사용(k6)
+            - 이를 위해 스토어 서버에서 유저 서버의 `findById()` 메서드를 사용하게 하고, 그에 대한 응답 속도가 return 값으로 반환되는 메서드를 구현
+- **테스트 시작**
+    - REST 방식 테스트
+        
+        ```jsx
+        import http from 'k6/http';
+        import { check, sleep } from 'k6';
+        export const options = {
+            vus: 100, // 동시 사용자 수
+            iterations: 1000, // 총 요청 수
+        };
+        const BASE_URL = 'https://haing.org';
+        const ACCESS_TOKEN = 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0IiwiZW1haWwiOiJ1c2VyMkBlbWFpbC5jb20iLCJ1c2VyUm9sZSI6IlJPTEVfVVNFUiIsInRva2VuVHlwZSI6ImFjY2VzcyIsImV4cCI6MTc0NTkxMjU3NCwiaWF0IjoxNzQ1OTEwNzc0fQ.jBYpOe8GTReq6fuOhMrJie_LqpvPMIDQNIRpU76eNF5P6JAOwGZ84CquI8MCk-8Tz-rlUTAVZPFwH7VQIWHWsw'; // 수동으로 로그인해서 복사한 토큰
+        export default function () {
+            const headers = {
+                Authorization: `Bearer ${ACCESS_TOKEN}`,
+            };
+            const res = http.get(`${BASE_URL}/api/v2/users`, { headers });
+            check(res, {
+                '회원 조회 성공': (r) => r.status === 200,
+            });
+            sleep(1);
+        }
+        ```
+        
+        - k6 테스트를 위해 위와 같이 스크립트를 작성
+        - 유저 서버에서 로그인한 본인의 정보를 조회하는 `findUser()` 메서드에 1000건의 요청을 보낸다
+        - 이때, 테스트를 위한 JWT 토큰은 수동으로 넣어 테스트를 진행한다(`ACCESS_TOKEN=...`)
+        - 404 오류 발생 및 k6 테스트 코드 수정
+            
+            ```jsx
+            import http from 'k6/http';
+            import { check, sleep } from 'k6';
+            
+            export const options = {
+                vus: 100,
+                iterations: 1000,
+                insecureSkipTLSVerify: true, // SSL 인증서 검증 무시
+            };
+            
+            const ACCESS_TOKEN = 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0IiwiZW1haWwiOiJ1c2VyMkBlbWFpbC5jb20iLCJ1c2VyUm9sZSI6IlJPTEVfVVNFUiIsInRva2VuVHlwZSI6ImFjY2VzcyIsImV4cCI6MTc0NTkxNjk3MSwiaWF0IjoxNzQ1OTE1MTcxfQ.8b1SkyIfiNle8g2l9D_irZTZVPz6f3HTOf9pY_6flqwjrGUPA8M6dGe9VQ5Mqron9d6BS6ShkhhmU0WuhN2-_g';
+            
+            export default function () {
+                const headers = {
+                    Authorization: `Bearer ${ACCESS_TOKEN}`,
+                    Host: 'haing.org', // 중요한 포인트: Host 헤더 강제 지정
+                };
+            
+                // 중요한 포인트: IP로 요청 (도메인 대신)
+                const res = http.get('https://haing.org/api/v1/users', { headers });
+            
+                console.log(`status: ${res.status}`);
+                console.log(`body: ${res.body}`);
+            
+                check(res, {
+                    '회원 조회 성공': (r) => r.status === 200,
+                });
+            
+                sleep(1);
+            }
+            ```
+            
+        - 결과
+            
+            import http from 'k6/http';
+            import { check, sleep } from 'k6';
+            
+            export const options = {
+                vus: 100,
+                iterations: 1000,
+                insecureSkipTLSVerify: true, // SSL 인증서 검증 무시
+            };
+            
+            const ACCESS_TOKEN = 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0IiwiZW1haWwiOiJ1c2VyMkBlbWFpbC5jb20iLCJ1c2VyUm9sZSI6IlJPTEVfVVNFUiIsInRva2VuVHlwZSI6ImFjY2VzcyIsImV4cCI6MTc0NTkxNjk3MSwiaWF0IjoxNzQ1OTE1MTcxfQ.8b1SkyIfiNle8g2l9D_irZTZVPz6f3HTOf9pY_6flqwjrGUPA8M6dGe9VQ5Mqron9d6BS6ShkhhmU0WuhN2-_g';
+            
+            export default function () {
+                const headers = {
+                    Authorization: `Bearer ${ACCESS_TOKEN}`,
+                    Host: 'haing.org', // 중요한 포인트: Host 헤더 강제 지정
+                };
+            
+                // 중요한 포인트: IP로 요청 (도메인 대신)
+                const res = http.get('
+            
+            https://haing.org/api/v1/users
+            
+            ', { headers });
+            
+                console.log(`status: ${res.status}`);
+                console.log(`body: ${res.body}`);
+            
+                check(res, {
+                    '회원 조회 성공': (r) => r.status === 200,
+                });
+            
+                sleep(1);
+            }
+            
+            ```
+            ✓ 회원 조회 성공
+                 checks.........................: 100.00% 1000 out of 1000
+                 data_received..................: 915 kB  29 kB/s
+                 data_sent......................: 108 kB  3.4 kB/s
+                 http_req_blocked...............: avg=31.94ms  min=0s      med=0s       max=1.89s    p(90)=14.43ms  p(95)=179.74ms
+                 http_req_connecting............: avg=5.37ms   min=0s      med=0s       max=207.34ms p(90)=868.45µs p(95)=27.3ms
+                 http_req_duration..............: avg=603.16ms min=13.86ms med=476.55ms max=3.07s    p(90)=1.29s    p(95)=1.87s
+                   { expected_response:true }...: avg=603.16ms min=13.86ms med=476.55ms max=3.07s    p(90)=1.29s    p(95)=1.87s
+                 http_req_failed................: 0.00%   0 out of 1000
+                 http_req_receiving.............: avg=13.18ms  min=0s      med=0s       max=298.56ms p(90)=2.41ms   p(95)=101.77ms
+                 http_req_sending...............: avg=274.26µs min=0s      med=0s       max=12.09ms  p(90)=793.83µs p(95)=1.01ms
+                 http_req_tls_handshaking.......: avg=13.79ms  min=0s      med=0s       max=1.73s    p(90)=2ms      p(95)=49.89ms
+                 http_req_waiting...............: avg=589.7ms  min=13.26ms med=466.52ms max=3.07s    p(90)=1.19s    p(95)=1.87s
+                 http_reqs......................: 1000    31.485737/s
+                 iteration_duration.............: avg=3.07s    min=1.01s   med=1.82s    max=14.16s   p(90)=6.42s    p(95)=11.4s
+                 iterations.....................: 1000    31.485737/s
+                 vus............................: 38      min=38           max=100
+                 vus_max........................: 100     min=100          max=100
+                 
+            running (00m31.8s), 000/100 VUs, 1000 complete and 0 interrupted iterations
+            default ✓ [======================================] 100 VUs  00m31.8s/10m0s  1000/1000 shared iters
+            ```
+            
+            | 항목 | 평가 |
+            | --- | --- |
+            | 요청 성공률 | 100% (1000건 중 1000건 성공) |
+            | 평균 응답속도 (avg http_req_duration) | 약 603ms |
+            | 중앙값 응답속도 (med http_req_duration) | 약 476ms |
+            | 최대 응답속도 (max http_req_duration) | 3.07초 |
+            | 최소 응답속도 (min http_req_duration) | 약 13ms |
+            | 실패율 (http_req_failed) | 0% |
+            | 초당 처리량 (http_reqs) | 약 31 req/s |
+            | 전체 테스트 소요 시간 | 약 31.8초 |
+            | 부하 테스트 결과 | 100명의 동시 사용자(VU)로 1000건 요청을 안정적으로 처리할 수 있었음 |
+            - 위와 같은 결과를 얻을 수 있었다
+    - gRPC 방식 테스트
+        - gRPC방식의 원활한 테스트를 위해 스토어 서버에 유저 정보를 요청하는 로직을 새로 추가
+            
+            ```java
+            public long measureFindById() {
+                Long userId = 1L;
+                long startTime = System.currentTimeMillis();
+                userGrpcClient.getUserById(userId);
+                long endTime = System.currentTimeMillis();
+                    
+                return endTime - startTime;
+            }
+            ```
+            
+            - k6를 이용해 본 메서드와 연결된 컨트롤러 url로 요청을 1000건 보낼 계획
+        - 결과
+            
+            ```
+            ✓ 회원 조회 성공
+                 checks.........................: 100.00% 1000 out of 1000
+                 data_received..................: 593 kB  33 kB/s
+                 data_sent......................: 109 kB  6.1 kB/s
+                 http_req_blocked...............: avg=18.14ms  min=0s      med=0s       max=207.37ms p(90)=15.1ms   p(95)=181.08ms
+                 http_req_connecting............: avg=3.08ms   min=0s      med=0s       max=58.29ms  p(90)=852.67µs p(95)=29.17ms
+                 http_req_duration..............: avg=660.3ms  min=28.76ms med=451.48ms max=3.6s     p(90)=1.41s    p(95)=1.83s
+                   { expected_response:true }...: avg=660.3ms  min=28.76ms med=451.48ms max=3.6s     p(90)=1.41s    p(95)=1.83s
+                 http_req_failed................: 0.00%   0 out of 1000
+                 http_req_receiving.............: avg=108.79µs min=0s      med=0s       max=13.1ms   p(90)=512.42µs p(95)=551.46µs
+                 http_req_sending...............: avg=262.93µs min=0s      med=0s       max=20.07ms  p(90)=573.2µs  p(95)=928.29µs
+                 http_req_tls_handshaking.......: avg=4.07ms   min=0s      med=0s       max=64.42ms  p(90)=2.5ms    p(95)=38.07ms
+                 http_req_waiting...............: avg=659.93ms min=28.76ms med=451.48ms max=3.6s     p(90)=1.41s    p(95)=1.83s
+                 http_reqs......................: 1000    56.162879/s
+                 iteration_duration.............: avg=1.71s    min=1.03s   med=1.5s     max=4.89s    p(90)=2.46s    p(95)=3s
+                 iterations.....................: 1000    56.162879/s
+                 vus............................: 67      min=67           max=100
+                 vus_max........................: 100     min=100          max=100
+                 
+            running (00m17.8s), 000/100 VUs, 1000 complete and 0 interrupted iterations
+            ```
+            
+            | 항목 | 평가 |
+            | --- | --- |
+            | 요청 성공률 | 100% (1000건 중 1000건 성공) |
+            | 평균 응답속도 (avg http_req_duration) | 약 660ms |
+            | 중앙값 응답속도 (med http_req_duration) | 약 451ms |
+            | 최대 응답속도 (max http_req_duration) | 3.6초 |
+            | 최소 응답속도 (min http_req_duration) | 약 28ms |
+            | 실패율 (http_req_failed) | 0% |
+            | 초당 처리량 (http_reqs) | 약 56 req/s |
+            | 전체 테스트 소요 시간 | 약 17.8초 |
+            | 부하 테스트 결과 | 100명의 동시 사용자(VU)로 1000건 요청을 안정적으로 처리할 수 있었음 |
+            - 위와 같은 결과를 얻을 수 있었다
+
+### 3️⃣ 결과
+
+---
+
+```
+✓ 회원 조회 성공
+     checks.........................: 100.00% 1000 out of 1000
+     data_received..................: 915 kB  29 kB/s
+     data_sent......................: 108 kB  3.4 kB/s
+     http_req_blocked...............: avg=31.94ms  min=0s      med=0s       max=1.89s    p(90)=14.43ms  p(95)=179.74ms
+     http_req_connecting............: avg=5.37ms   min=0s      med=0s       max=207.34ms p(90)=868.45µs p(95)=27.3ms
+     http_req_duration..............: avg=603.16ms min=13.86ms med=476.55ms max=3.07s    p(90)=1.29s    p(95)=1.87s
+       { expected_response:true }...: avg=603.16ms min=13.86ms med=476.55ms max=3.07s    p(90)=1.29s    p(95)=1.87s
+     http_req_failed................: 0.00%   0 out of 1000
+     http_req_receiving.............: avg=13.18ms  min=0s      med=0s       max=298.56ms p(90)=2.41ms   p(95)=101.77ms
+     http_req_sending...............: avg=274.26µs min=0s      med=0s       max=12.09ms  p(90)=793.83µs p(95)=1.01ms
+     http_req_tls_handshaking.......: avg=13.79ms  min=0s      med=0s       max=1.73s    p(90)=2ms      p(95)=49.89ms
+     http_req_waiting...............: avg=589.7ms  min=13.26ms med=466.52ms max=3.07s    p(90)=1.19s    p(95)=1.87s
+     http_reqs......................: 1000    31.485737/s
+     iteration_duration.............: avg=3.07s    min=1.01s   med=1.82s    max=14.16s   p(90)=6.42s    p(95)=11.4s
+     iterations.....................: 1000    31.485737/s
+     vus............................: 38      min=38           max=100
+     vus_max........................: 100     min=100          max=100
+     
+running (00m31.8s), 000/100 VUs, 1000 complete and 0 interrupted iterations
+default ✓ [======================================] 100 VUs  00m31.8s/10m0s  1000/1000 shared iters
+```
+
+- REST방식
+
+```
+✓ 회원 조회 성공
+     checks.........................: 100.00% 1000 out of 1000
+     data_received..................: 915 kB  29 kB/s
+     data_sent......................: 108 kB  3.4 kB/s
+     http_req_blocked...............: avg=31.94ms  min=0s      med=0s       max=1.89s    p(90)=14.43ms  p(95)=179.74ms
+     http_req_connecting............: avg=5.37ms   min=0s      med=0s       max=207.34ms p(90)=868.45µs p(95)=27.3ms
+     http_req_duration..............: avg=603.16ms min=13.86ms med=476.55ms max=3.07s    p(90)=1.29s    p(95)=1.87s
+       { expected_response:true }...: avg=603.16ms min=13.86ms med=476.55ms max=3.07s    p(90)=1.29s    p(95)=1.87s
+     http_req_failed................: 0.00%   0 out of 1000
+     http_req_receiving.............: avg=13.18ms  min=0s      med=0s       max=298.56ms p(90)=2.41ms   p(95)=101.77ms
+     http_req_sending...............: avg=274.26µs min=0s      med=0s       max=12.09ms  p(90)=793.83µs p(95)=1.01ms
+     http_req_tls_handshaking.......: avg=13.79ms  min=0s      med=0s       max=1.73s    p(90)=2ms      p(95)=49.89ms
+     http_req_waiting...............: avg=589.7ms  min=13.26ms med=466.52ms max=3.07s    p(90)=1.19s    p(95)=1.87s
+     http_reqs......................: 1000    31.485737/s
+     iteration_duration.............: avg=3.07s    min=1.01s   med=1.82s    max=14.16s   p(90)=6.42s    p(95)=11.4s
+     iterations.....................: 1000    31.485737/s
+     vus............................: 38      min=38           max=100
+     vus_max........................: 100     min=100          max=100
+     
+running (00m31.8s), 000/100 VUs, 1000 complete and 0 interrupted iterations
+default ✓ [======================================] 100 VUs  00m31.8s/10m0s  1000/1000 shared iters
+```
+
+- gRPC 방식
+
+### 4️⃣ 결론
+
+---
+
+| 항목 | gRPC | REST | 차이/비교 |
+| --- | --- | --- | --- |
+| 요청 성공률 | 100% | 100% | 동일 ✅ |
+| 총 요청 수 | 1000 | 1000 | 동일 ✅ |
+| 평균 응답 속도 (avg http_req_duration) | **660.3ms** | **603.16ms** | REST가 약 57ms 더 빠름 |
+| 최소 응답 시간 (min http_req_duration) | 28.76ms | 13.86ms | REST가 더 빠름 |
+| 최대 응답 시간 (max http_req_duration) | 3.6s | 3.07s | REST가 더 빠름 |
+| 중앙값 응답 시간 (med http_req_duration) | 451.48ms | 476.55ms | gRPC가 약간 더 빠름 |
+| 90% 응답 시간 (p90) | 1.41s | 1.29s | REST가 더 빠름 |
+| 95% 응답 시간 (p95) | 1.83s | 1.87s | 비슷함 |
+| 총 테스트 시간 (running time) | 17.8초 | 31.8초 | gRPC가 전체 걸린 시간은 짧음 |
+| 평균 처리 속도 (requests/sec) | **56 req/s** | **31 req/s** | **gRPC가 더 빠름** |
+
+![image.png](attachment:3441d347-22c9-4c38-ac68-58c62bbe334f:image.png)
+
+- 단건 요청 평균 응답 속도는 REST 방식이 약 57ms 정도 더 빠른 결과를 보였다. 
+(REST 603ms vs gRPC 660ms)
+- 전체 부하 처리(초당 요청 처리량)는 gRPC가 약 1.8배 빠른 결과를 기록했다.
+(gRPC 56 req/s vs REST 31 req/s)
+
+**⇒ gRPC는 대량의 요청 처리에 훨씬 유리한 구조**
+
+**⇒ 소량의 요청 혹은 단순 통신에는 REST가 더 빠를 수 있으나 대량의 트래픽으로 갈 수록 gRPC가 더 유리함을 알 수 있었음**
+
+### 5️⃣ 최종 결론
+
+---
+
+- 시스템의 성격이 소규모 요청 중심인지, 대규모 요청/트래픽 중심인지에 따라 REST와 gRPC 방식을 선택하는 전략이 필요하다.
+    - 소규모 요청 중심 → REST방식에 대한 고민 필요
+    - 대규모 요청 중심 → gRPC방식에 대한 고민 필요
+
+### 6️⃣ 회고
+
+---
+
+- REST 방식과 gRPC 방식에 대한 비교를 통해 서버 통신에 관해 기술 선택의 폭이 더 넓어졌음을 느꼈다.
+  
 </details>
 
 <details>
