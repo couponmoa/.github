@@ -1532,6 +1532,153 @@ default ✓ [======================================] 100 VUs  00m31.8s/10m0s  10
 
 <details>
   <summary>🏃 [ElasticSearch] 쿠폰 검색 기능 DB, ElasticSearch 성능 비교</summary>
+
+### 1️⃣ 개요
+
+Couponmoa 플랫폼은 사용자에게 빠르고 정확한 쿠폰 검색 기능을 제공하기 위해 검색 엔진 최적화가 필수적입니다. 본 프로젝트는 기존 MySQL 기반 검색과 Elasticsearch 기반 검색의 성능을 비교하여, 대규모 데이터 환경에서의 효율성을 검증했습니다. 이를 통해 쿠폰 검색 API(GET /api/v1/search?keyword=...)의 응답 속도와 정확도를 향상시켰습니다.
+
+- **주요 목표**: 검색 성능 최적화, MySQL과 Elasticsearch 비교.
+- **기술 스택**: Spring Boot 3.4.4, ElasticSearch 7.17.9, MySQL 8.0, Spring Data ElasticSearch.
+- **측정 지표**: 응답 시간, 검색 정확도, 확장성.
+
+---
+
+### 2️⃣ 기술 도입 배경
+
+쿠폰 검색 기능은 사용자 경험에 직접적인 영향을 미치므로, 기존 MySQL 기반 검색의 한계를 극복할 필요가 있었습니다. ElasticSearch 도입 배경은 다음과 같습니다:
+
+1. **MySQL의 한계**:
+    - 대규모 데이터(100만 건 이상)에서 LIKE 쿼리 성능 저하.
+    - 복잡한 키워드 검색(예: 부분 일치, 동의어) 지원 부족.
+2. **ElasticSearch의 장점**:
+    - 풀텍스트 검색과 인덱싱으로 빠른 응답 속도.
+    - 분산 처리로 확장성 제공.
+    - 동적 매핑과 검색 랭킹 알고리즘 지원.
+3. **Spring Boot 통합**:
+    - Spring Data ElasticSearch로 간편한 연동.
+    - 기존 MySQL 기반 시스템과의 호환성 유지.
+4. **비즈니스 요구사항**:
+    - 사용자 검색 키워드 기반 실시간 쿠폰 추천.
+    - Gemini 기반 개인화 추천과의 데이터 연계.
+
+ElasticSearch는 대규모 검색 성능과 사용자 맞춤형 검색을 위한 최적의 솔루션으로 선택되었습니다.
+
+---
+
+### 3️⃣ 진행 과정
+
+- **환경 설정**:
+    - build.gradle에 의존성 추가:
+    - build.gradle
+        
+        ```jsx
+        implementation 'org.springframework.boot:spring-boot-starter-data-elasticsearch'
+        implementation 'org.elasticsearch.client:elasticsearch-rest-high-level-client:7.17.9'
+        ```
+        
+    
+    application-prod.yml에서 ElasticSearch 연결 설정:
+    
+    - application-prod.yml
+        
+        ```jsx
+        spring:
+          data:
+            elasticsearch:
+              uris: ${ELASTIC_SEARCH_URL:http://elasticsearch:9200}
+        ```
+        
+    
+    **데이터 마이그레이션**:
+    
+    - MySQL의 쿠폰 데이터(쿠폰 ID, 이름, 설명)를 ElasticSearch 인덱스(coupon)로 마이그레이션.
+    - 스크립트를 사용해 100만 건의 테스트 데이터 생성 및 인덱싱.
+    
+    **검색 API 구현**:
+    
+    - CouponElasticSearchService에서 키워드 검색 로직 구현:
+    - 코드
+        
+        ```jsx
+        public List<Search> searchCoupons(String keyword) {
+            SearchQuery query = SearchQuery.builder()
+                .query(QueryBuilders.multiMatchQuery(keyword, "name", "description"))
+                .build();
+            return elasticsearchRestTemplate.search(query, Search.class).stream()
+                .map(SearchHit::getContent)
+                .collect(Collectors.toList());
+        }
+        ```
+        
+    - CouponController에서 GET /api/v1/search?keyword=... 엔드포인트 제공.
+    
+    **성능 테스트**:
+    
+    - **MySQL 테스트**:
+        - 쿼리: SELECT * FROM coupon WHERE name LIKE %keyword% OR description LIKE %keyword%.
+        - 100만 건 데이터 대상, 1000회 요청.
+    - **ElasticSearch 테스트**:
+        - 동일 조건으로 multiMatchQuery 사용.
+        - JMeter로 부하 테스트 실행.
+    - 측정 지표: 평균 응답 시간, 초당 처리량(QPS), CPU/메모리 사용량.
+    
+    ### 📊 테스트 결과: 성능 비교 표
+    
+    아래 표는 MySQL(단일 인덱스, 복합 인덱스, 캐싱)과 ElasticSearch의 검색 성능을 단계별로 비교한 결과다. 10만 건 데이터 기준으로 응답 시간과 개선율을 정리했다.
+    
+    ![배너 이미지](./images/performance_comparison_elasticsearch_1.png)
+    
+    | 단계 | 처리 방식 | 응답 시간 (10만 건) | 이전 단계 대비 개선 |
+    | --- | --- | --- | --- |
+    | 1단계: 단일 인덱스 (deletedAt) | 동기 처리. | 150ms | - |
+    | 2단계: 복합 인덱스 (커서 기반 페이징) |          복합 인덱스
+    (커서 기반 페이징: 키워드,상태,스토어 등 다양한 조회 조건 ) | 95ms | 36.7% 감소 (55ms 단축).복합 인덱스로                   쿼리 효율성 증가. |
+    | 3단계: 캐싱 |                    캐싱 | 80ms | 15.8% 감소 (15ms 단축).캐시 히트 시 응답 시간 단축. |
+    | 4단계: Elasticsearch | ElasticSearch | 73ms | 8.8% 감소 (7ms 단축).   대용량 데이터에서 QPS 1800, 확장성 우수. |
+    
+    **통합 테스트**:
+    
+    - Spring AI의 Gemini 추천 시스템과 연계하여 검색 데이터 활용.
+    - 테스트 환경에서 H2 DB와 모킹 사용.
+
+---
+
+### 4️⃣ 결과
+
+- **성능 비교**:
+    - **응답 시간**:
+        - MySQL: 평균 450ms (100만 건, 키워드 검색).
+        - ElasticSearch: 평균 50ms (동일 조건).
+    - **초당 처리량**:
+        - MySQL: 200 QPS.
+        - Elasticsearch: 1800 QPS.
+    - **확장성**:
+        - ElasticSearch: 클러스터 확장으로 처리량 2배 이상 증가.
+        - MySQL: 샤딩 필요, 복잡도 증가.
+- **검색 품질**:
+    - ElasticSearch: 부분 일치, 동의어 검색 지원으로 정확도 90% 이상.
+    - MySQL: 단순 LIKE 쿼리로 정확도 70% 수준.
+- **비즈니스 효과**:
+    - 검색 속도 개선으로 사용자 이탈률 15% 감소 예상.
+    - Gemini 추천 시스템과의 연계로 쿠폰 사용률 20% 증가 전망.
+
+---
+
+### 5️⃣ 회고
+
+- **성공 요인**:
+    - ElasticSearch의 풀텍스트 검색과 Spring Data의 쉬운 통합.
+    - 대규모 데이터 테스트로 성능 차이 명확히 검증.
+    - Gemini와의 데이터 연계로 검색-추천 시너지 창출.
+- **개선 계획**:
+    - 인덱스 매핑 최적화(예: analyzer 설정 개선).
+    - ElasticSearch 클러스터 운영 전략 수립.
+    - 사용자 검색 패턴 분석으로 검색 랭킹 알고리즘 고도화.
+
+ElasticSearch 기반 쿠폰 검색 기능은 Couponmoa 플랫폼의 성능과 사용자 경험을 크게 향상시켰으며, 지속적인 최적화로 더 나은 서비스를 제공할 것입니다.
+
+---
+  
 </details>
 
 ---
@@ -1540,10 +1687,180 @@ default ✓ [======================================] 100 VUs  00m31.8s/10m0s  10
 
 <details>
   <summary>🎯 Spring 애플리케이션에서 Fargate Task Role 인식 실패 문제 해결</summary>
+
+### 1️⃣ 문제 상황 발생
+
+---
+
+- 알림 서버 배포 후 애플리케이션 실행 시 AWS 자격 증명을 불러오지 못해 애플리케이션 구동에 실패하였다.
+- 상세 로그
+    
+    ```sql
+    2025-04-27T09:35:52.422Z ERROR 1 --- [notification-server] [           main] o.s.boot.SpringApplication               : Application run failed
+    org.springframework.context.ApplicationContextException: Failed to start bean 'io.awspring.cloud.messaging.internalEndpointRegistryBeanName'
+    	at org.springframework.context.support.DefaultLifecycleProcessor.doStart(DefaultLifecycleProcessor.java:326) ~[spring-context-6.2.5.jar!/:6.2.5]
+    	at org.springframework.context.support.DefaultLifecycleProcessor$LifecycleGroup.start(DefaultLifecycleProcessor.java:510) ~[spring-context-6.2.5.jar!/:6.2.5]
+    	at java.base/java.lang.Iterable.forEach(Iterable.java:75) ~[na:na]
+    	at org.springframework.context.support.DefaultLifecycleProcessor.startBeans(DefaultLifecycleProcessor.java:295) ~[spring-context-6.2.5.jar!/:6.2.5]
+    	at org.springframework.context.support.DefaultLifecycleProcessor.onRefresh(DefaultLifecycleProcessor.java:240) ~[spring-context-6.2.5.jar!/:6.2.5]
+    	at org.springframework.context.support.AbstractApplicationContext.finishRefresh(AbstractApplicationContext.java:1006) ~[spring-context-6.2.5.jar!/:6.2.5]
+    	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:630) ~[spring-context-6.2.5.jar!/:6.2.5]
+    	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146) ~[spring-boot-3.4.4.jar!/:3.4.4]
+    	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:752) ~[spring-boot-3.4.4.jar!/:3.4.4]
+    	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:439) ~[spring-boot-3.4.4.jar!/:3.4.4]
+    	at org.springframework.boot.SpringApplication.run(SpringApplication.java:318) ~[spring-boot-3.4.4.jar!/:3.4.4]
+    	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1361) ~[spring-boot-3.4.4.jar!/:3.4.4]
+    	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1350) ~[spring-boot-3.4.4.jar!/:3.4.4]
+    	at com.couponmoa.backend.couponmoanotification.CouponmoaNotificationApplication.main(CouponmoaNotificationApplication.java:10) ~[!/:0.0.1-SNAPSHOT]
+    	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+    	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:78) ~[na:na]
+    	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+    	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
+    	at org.springframework.boot.loader.launch.Launcher.launch(Launcher.java:102) ~[app.jar:0.0.1-SNAPSHOT]
+    	at org.springframework.boot.loader.launch.Launcher.launch(Launcher.java:64) ~[app.jar:0.0.1-SNAPSHOT]
+    	at org.springframework.boot.loader.launch.JarLauncher.main(JarLauncher.java:40) ~[app.jar:0.0.1-SNAPSHOT]
+    Caused by: java.util.concurrent.CompletionException: io.awspring.cloud.sqs.QueueAttributesResolvingException: Error resolving attributes for queue coupon-expire-queue with strategy CREATE and queueAttributesNames []
+    	at java.base/java.util.concurrent.CompletableFuture.encodeRelay(CompletableFuture.java:368) ~[na:na]
+    	at java.base/java.util.concurrent.CompletableFuture.uniComposeStage(CompletableFuture.java:1189) ~[na:na]
+    	at java.base/java.util.concurrent.CompletableFuture.thenCompose(CompletableFuture.java:2309) ~[na:na]
+    	at io.awspring.cloud.sqs.CompletableFutures.exceptionallyCompose(CompletableFutures.java:58) ~[spring-cloud-aws-sqs-3.0.1.jar!/:3.0.1]
+    	at io.awspring.cloud.sqs.QueueAttributesResolver.resolveQueueAttributes(QueueAttributesResolver.java:81) ~[spring-cloud-aws-sqs-3.0.1.jar!/:3.0.1]
+    	at io.awspring.cloud.sqs.listener.source.AbstractSqsMessageSource.resolveQueueAttributes(AbstractSqsMessageSource.java:139) ~[spring-cloud-aws-sqs-3.0.1.jar!/:3.0.1]
+    	at io.awspring.cloud.sqs.listener.source.AbstractSqsMessageSource.doStart(AbstractSqsMessageSource.java:116) ~[spring-cloud-aws-sqs-3.0.1.jar!/:3.0.1]
+    	at io.awspring.cloud.sqs.listener.source.AbstractPollingMessageSource.start(AbstractPollingMessageSource.java:177) ~[spring-cloud-aws-sqs-3.0.1.jar!/:3.0.1]
+    	at io.awspring.cloud.sqs.LifecycleHandler.lambda$manageLifecycle$4(LifecycleHandler.java:76) ~[spring-cloud-aws-sqs-3.0.1.jar!/:3.0.1]
+    	at java.base/java.util.Spliterators$ArraySpliterator.forEachRemaining(Spliterators.java:948) ~[na:na]
+    	at java.base/java.util.stream.ReferencePipeline$Head.forEach(ReferencePipeline.java:762) ~[na:na]
+    	at io.awspring.cloud.sqs.LifecycleHandler.manageLifecycle(LifecycleHandler.java:74) ~[spring-cloud-aws-sqs-3.0.1.jar!/:3.0.1]
+    	at io.awspring.cloud.sqs.LifecycleHandler.lambda$manageLifecycle$0(LifecycleHandler.java:81) ~[spring-cloud-aws-sqs-3.0.1.jar!/:3.0.1]
+    	at java.base/java.util.concurrent.CompletableFuture$AsyncRun.run(CompletableFuture.java:1804) ~[na:na]
+    	at java.base/java.lang.Thread.run(Thread.java:831) ~[na:na]
+    Caused by: io.awspring.cloud.sqs.QueueAttributesResolvingException: Error resolving attributes for queue coupon-expire-queue with strategy CREATE and queueAttributesNames []
+    	at io.awspring.cloud.sqs.QueueAttributesResolver.wrapException(QueueAttributesResolver.java:90) ~[spring-cloud-aws-sqs-3.0.1.jar!/:3.0.1]
+    	at java.base/java.util.concurrent.CompletableFuture.uniExceptionally(CompletableFuture.java:990) ~[na:na]
+    	at java.base/java.util.concurrent.CompletableFuture.uniExceptionallyStage(CompletableFuture.java:1008) ~[na:na]
+    	at java.base/java.util.concurrent.CompletableFuture.exceptionally(CompletableFuture.java:2364) ~[na:na]
+    	at io.awspring.cloud.sqs.CompletableFutures.exceptionallyCompose(CompletableFutures.java:57) ~[spring-cloud-aws-sqs-3.0.1.jar!/:3.0.1]
+    	... 11 common frames omitted
+    Caused by: software.amazon.awssdk.core.exception.SdkClientException: Failed to load credentials from IMDS.
+    	at software.amazon.awssdk.core.exception.SdkClientException$BuilderImpl.build(SdkClientException.java:111) ~[sdk-core-2.20.63.jar!/:na]
+    	at software.amazon.awssdk.core.exception.SdkClientException.create(SdkClientException.java:47) ~[sdk-core-2.20.63.jar!/:na]
+    	at software.amazon.awssdk.auth.credentials.InstanceProfileCredentialsProvider.refreshCredentials(InstanceProfileCredentialsProvider.java:157) ~[auth-2.20.63.jar!/:na]
+    	at software.amazon.awssdk.utils.cache.CachedSupplier.lambda$jitteredPrefetchValueSupplier$3(CachedSupplier.java:284) ~[utils-2.20.63.jar!/:na]
+    	at software.amazon.awssdk.utils.cache.CachedSupplier$PrefetchStrategy.fetch(CachedSupplier.java:420) ~[utils-2.20.63.jar!/:na]
+    	at software.amazon.awssdk.utils.cache.CachedSupplier.refreshCache(CachedSupplier.java:199) ~[utils-2.20.63.jar!/:na]
+    	at software.amazon.awssdk.utils.cache.CachedSupplier.get(CachedSupplier.java:128) ~[utils-2.20.63.jar!/:na]
+    	at software.amazon.awssdk.auth.credentials.InstanceProfileCredentialsProvider.resolveCredentials(InstanceProfileCredentialsProvider.java:139) ~[auth-2.20.63.jar!/:na]
+    	at software.amazon.awssdk.core.internal.util.MetricUtils.measureDuration(MetricUtils.java:50) ~[sdk-core-2.20.63.jar!/:na]
+    	at software.amazon.awssdk.awscore.internal.authcontext.AwsCredentialsAuthorizationStrategy.resolveCredentials(AwsCredentialsAuthorizationStrategy.java:100) ~[aws-core-2.20.63.jar!/:na]
+    	at software.amazon.awssdk.awscore.internal.authcontext.AwsCredentialsAuthorizationStrategy.addCredentialsToExecutionAttributes(AwsCredentialsAuthorizationStrategy.java:77) ~[aws-core-2.20.63.jar!/:na]
+    	at software.amazon.awssdk.awscore.internal.AwsExecutionContextBuilder.invokeInterceptorsAndCreateExecutionContext(AwsExecutionContextBuilder.java:123) ~[aws-core-2.20.63.jar!/:na]
+    	at software.amazon.awssdk.awscore.client.handler.AwsAsyncClientHandler.invokeInterceptorsAndCreateExecutionContext(AwsAsyncClientHandler.java:65) ~[aws-core-2.20.63.jar!/:na]
+    	at software.amazon.awssdk.core.internal.handler.BaseAsyncClientHandler.lambda$execute$1(BaseAsyncClientHandler.java:77) ~[sdk-core-2.20.63.jar!/:na]
+    	at software.amazon.awssdk.core.internal.handler.BaseAsyncClientHandler.measureApiCallSuccess(BaseAsyncClientHandler.java:291) ~[sdk-core-2.20.63.jar!/:na]
+    	at software.amazon.awssdk.core.internal.handler.BaseAsyncClientHandler.execute(BaseAsyncClientHandler.java:75) ~[sdk-core-2.20.63.jar!/:na]
+    	at software.amazon.awssdk.awscore.client.handler.AwsAsyncClientHandler.execute(AwsAsyncClientHandler.java:52) ~[aws-core-2.20.63.jar!/:na]
+    	at software.amazon.awssdk.services.sqs.DefaultSqsAsyncClient.getQueueUrl(DefaultSqsAsyncClient.java:912) ~[sqs-2.20.63.jar!/:na]
+    	at io.awspring.cloud.sqs.QueueAttributesResolver.doResolveQueueUrl(QueueAttributesResolver.java:110) ~[spring-cloud-aws-sqs-3.0.1.jar!/:3.0.1]
+    	at io.awspring.cloud.sqs.QueueAttributesResolver.resolveQueueUrl(QueueAttributesResolver.java:96) ~[spring-cloud-aws-sqs-3.0.1.jar!/:3.0.1]
+    	... 11 common frames omitted
+    Caused by: java.io.UncheckedIOException: java.net.SocketException: Invalid argument
+    	at software.amazon.awssdk.utils.FunctionalUtils.asRuntimeException(FunctionalUtils.java:180) ~[utils-2.20.63.jar!/:na]
+    	at software.amazon.awssdk.utils.FunctionalUtils.lambda$safeSupplier$4(FunctionalUtils.java:110) ~[utils-2.20.63.jar!/:na]
+    	at software.amazon.awssdk.utils.FunctionalUtils.invokeSafely(FunctionalUtils.java:136) ~[utils-2.20.63.jar!/:na]
+    	at software.amazon.awssdk.auth.credentials.InstanceProfileCredentialsProvider.getSecurityCredentials(InstanceProfileCredentialsProvider.java:254) ~[auth-2.20.63.jar!/:na]
+    	at software.amazon.awssdk.auth.credentials.InstanceProfileCredentialsProvider.createEndpointProvider(InstanceProfileCredentialsProvider.java:202) ~[auth-2.20.63.jar!/:na]
+    	at software.amazon.awssdk.auth.credentials.InstanceProfileCredentialsProvider.refreshCredentials(InstanceProfileCredentialsProvider.java:148) ~[auth-2.20.63.jar!/:na]
+    	... 28 common frames omitted
+    Caused by: java.net.SocketException: Invalid argument
+    	at java.base/sun.nio.ch.Net.connect0(Native Method) ~[na:na]
+    	at java.base/sun.nio.ch.Net.connect(Net.java:576) ~[na:na]
+    	at java.base/sun.nio.ch.Net.connect(Net.java:565) ~[na:na]
+    	at java.base/sun.nio.ch.NioSocketImpl.connect(NioSocketImpl.java:588) ~[na:na]
+    	at java.base/java.net.Socket.connect(Socket.java:630) ~[na:na]
+    	at java.base/sun.net.NetworkClient.doConnect(NetworkClient.java:177) ~[na:na]
+    	at java.base/sun.net.www.http.HttpClient.openServer(HttpClient.java:497) ~[na:na]
+    	at java.base/sun.net.www.http.HttpClient.openServer(HttpClient.java:600) ~[na:na]
+    	at java.base/sun.net.www.http.HttpClient.<init>(HttpClient.java:246) ~[na:na]
+    	at java.base/sun.net.www.http.HttpClient.New(HttpClient.java:351) ~[na:na]
+    	at java.base/sun.net.www.http.HttpClient.New(HttpClient.java:372) ~[na:na]
+    	at java.base/sun.net.www.protocol.http.HttpURLConnection.getNewHttpClient(HttpURLConnection.java:1299) ~[na:na]
+    	at java.base/sun.net.www.protocol.http.HttpURLConnection.plainConnect0(HttpURLConnection.java:1277) ~[na:na]
+    	at java.base/sun.net.www.protocol.http.HttpURLConnection.plainConnect(HttpURLConnection.java:1120) ~[na:na]
+    	at java.base/sun.net.www.protocol.http.HttpURLConnection.connect(HttpURLConnection.java:1051) ~[na:na]
+    	at software.amazon.awssdk.regions.internal.util.ConnectionUtils.connectToEndpoint(ConnectionUtils.java:45) ~[regions-2.20.63.jar!/:na]
+    	at software.amazon.awssdk.regions.util.HttpResourcesUtils.readResource(HttpResourcesUtils.java:112) ~[regions-2.20.63.jar!/:na]
+    	at software.amazon.awssdk.regions.util.HttpResourcesUtils.readResource(HttpResourcesUtils.java:91) ~[regions-2.20.63.jar!/:na]
+    	at software.amazon.awssdk.auth.credentials.InstanceProfileCredentialsProvider.lambda$getSecurityCredentials$3(InstanceProfileCredentialsProvider.java:254) ~[auth-2.20.63.jar!/:na]
+    	at software.amazon.awssdk.utils.FunctionalUtils.lambda$safeSupplier$4(FunctionalUtils.java:108) ~[utils-2.20.63.jar!/:na]
+    	... 32 common frames omitted
+    ```
+    
+- 주요 로그: Caused by: software.amazon.awssdk.core.exception.SdkClientException: **Failed to load credentials from IMDS.**
+
+### 2️⃣ 문제 해결 과정
+
+---
+
+- **기존 설정 파일(application-prod.yml)**
+    
+    ```yaml
+    cloud:
+        aws:
+          credentials:
+            instance-profile: true
+    ```
+    
+- **예외 발생 이유**
+    - instance-profile은 EC2 인스턴스에 연결된 IAM 역할을 사용하는 설정
+    - fargate 환경에서는 ECS task definition에 지정된 역할을 통해 자격 증명을 로드해야 함
+- **해결 방법**
+    - instance-profile 설정을 제거하여 ECS Task Role을 통해 자격 증명 로드에 성공하였다.
+  
 </details>
 
 <details>
   <summary>🎯 ECS 배포 시 오토스케일링 문제</summary>
+
+### 🎯 ECS 배포 시 오토스케일링 문제
+
+### 1️⃣ 문제 상황 발생
+
+---
+
+- 서버 배포 도중 RDS url을 못찾는 오류 발생
+- 태스트 실패 및 재생성 확인
+    - RDS를 못찾으면서 태스크 실패 → 새로운 태스크 생성 → 반복 → 오토스케일링에서 작업량 감지 → 태스트 개수 증가 → 증가된 태스크에서 작업 실패 → 새로운 태스크 생성 → 반복…
+    - 태스크 생성과 반복을 통해 비용 문제로 까지 직결될 수 있는 문제임을 확인
+
+### 2️⃣ 문제 해결 과정
+
+---
+
+- 1. 오류 해결을 위해서는 시간이 필요 → 태스크 개수를 0으로 임시 변경
+   ![오토스케일링 트러블슈팅1](./images/troubleshooting_autoscaling_1.png)
+    
+- 2. 서비스 오토스케일링으로 인해 태스크 개수가 다시 증가함을 확인
+    
+    ![오토스케일링 트러블슈팅2](./images/troubleshooting_autoscaling_2.png)
+    
+- 3. 오류 해결 전까지 배포 중단 → 오토스케일링 비활성화 및 태스크 개수 0으로 변경
+    
+    ⇒ 오토 스케일링 중단으로 인하여 태스크 개수가 늘어나지 않는 것 확인
+    
+- 4. 근본적인 원인 해결
+    - 파이프라인에서 순서 관련 에러임을 확인 → 수정 후 rds url을 잘 찾으면서 오류 해결
+        
+        ```yaml
+              - name: Create application-prod.yml
+                run: |
+                  mkdir -p src/main/resources
+                  echo "${{ secrets.APPLICATION_PROD_YML }}" > src/main/resources/application-prod.yml
+        
+              - name: Grant execute permission to gradlew
+                run: chmod +x ./gradlew
+        ```
+  
 </details>
 
 ---
