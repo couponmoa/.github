@@ -202,3 +202,17 @@
 </table>
 
 </details>
+
+---
+
+## 🔄 GitHub Actions를 활용한 CI/CD Pipeline
+
+<table>
+  <tr>
+    <td>
+      ✅ CI
+        - **Trigger**: dev 브랜치에 코드가 push되거나 PR 발생 시 실행
+        - **Test**: 테스트 코드 수행
+    </td>
+  </tr>
+</table>
