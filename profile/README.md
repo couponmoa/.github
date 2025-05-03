@@ -1503,7 +1503,7 @@ default ✓ [======================================] 100 VUs  00m31.8s/10m0s  10
 | 총 테스트 시간 (running time) | 17.8초 | 31.8초 | gRPC가 전체 걸린 시간은 짧음 |
 | 평균 처리 속도 (requests/sec) | **56 req/s** | **31 req/s** | **gRPC가 더 빠름** |
 
-![image.png](attachment:3441d347-22c9-4c38-ac68-58c62bbe334f:image.png)
+![gRPC 비교 표](./images/performance_comparison_gRPC.png)
 
 - 단건 요청 평균 응답 속도는 REST 방식이 약 57ms 정도 더 빠른 결과를 보였다. 
 (REST 603ms vs gRPC 660ms)
