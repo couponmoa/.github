@@ -242,19 +242,20 @@
 </details>
 
 <details>
-  <summary><strong>v3(MSA 설계 후)</strong></summary>
-  <text>📌 user service</text>
-  <img src="./images/ERD_v3_user.png">
+  <summary><strong>v3 (MSA 설계 후)</strong></summary><br/>
 
-  📌 store service
-  
-  <img src="./images/ERD_v3_store.png">
+  ### 📌 user service  
+  <img src="./images/ERD_v3_user.png" width="300">
 
-  📌 coupon service
-  
-  <img src="./images/ERD_v3_coupon.png">
+  ### 📍 store service  
+  <img src="./images/ERD_v3_store_subscribe.png" width="300">
+  <img src="./images/ERD_v3_store_store.png" width="300">
 
-  📌 notification service
-  
-  <img src="./images/ERD_v3_notification.png">
+  ### 🎟️ coupon service  
+  <img src="./images/ERD_v3_coupon.png" width="300">
+
+  ### ✉️ notification service  
+  <img src="./images/ERD_v3_notification.png" width="300">
+
 </details>
+
