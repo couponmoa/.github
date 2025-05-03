@@ -207,12 +207,23 @@
 
 ## 🔄 GitHub Actions를 활용한 CI/CD Pipeline
 
-<table>
-  <tr>
-    <td>
-      ✅ CI
-        - **Trigger**: dev 브랜치에 코드가 push되거나 PR 발생 시 실행
-        - **Test**: 테스트 코드 수행
-    </td>
-  </tr>
-</table>
+<div style="border:1px solid #ddd; border-radius:6px; padding:12px; margin:10px 0;">
+
+### ✅ CI  
+- <b>Trigger:</b> dev 브랜치에 코드가 push되거나 PR 발생 시 실행  
+- <b>Test:</b> 테스트 코드 수행  
+
+</div>
+
+<div style="border:1px solid #ddd; border-radius:6px; padding:12px; margin:10px 0;">
+
+### ✈️ CD  
+- <b>Trigger:</b> dev 브랜치에 코드가 push되고, CI가 성공적으로 완료되었을 때 실행  
+
+- <b>Build & Deploy:</b>  
+  • AWS ECR에 Docker 이미지 빌드 및 푸시  
+  • AWS ECS에 새로운 이미지로 서비스 업데이트  
+
+- <b>Security:</b> GitHub Secrets에 AWS 인증 정보 등 비밀 값 저장  
+
+</div>
