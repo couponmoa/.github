@@ -330,9 +330,9 @@
 
 # 9. 🛠 기술 스택
 
-<table>
+<table width="100%">
   <tr>
-    <td valign="top" width="100%">
+    <td valign="top">
       <b>🧠 Language</b><br/>
         <img src="https://github.com/user-attachments/assets/7f579478-f27c-4218-882b-4eb8bc302b32" width="20">
         Java<br/><br/>
@@ -398,7 +398,7 @@
         K6<br/><br/>
       <hr style="margin:4px 0;"/>
     </td>
-    <td valign="top" width="100%">
+    <td valign="top">
       <b>🌐 IDE</b><br/>
         <img src="https://github.com/user-attachments/assets/" width="20">
         IntelliJ IDEA<br/><br/>
