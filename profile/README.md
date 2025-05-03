@@ -378,6 +378,7 @@
 
 <b>🧠 IDE</b><br/>
 • IntelliJ IDEA<br/><br/>
+<img src="https://github.com/user-attachments/assets/7f579478-f27c-4218-882b-4eb8bc302b32"><br/>
 
 <b>🔐 Security</b><br/>
 • JWT<br/>
