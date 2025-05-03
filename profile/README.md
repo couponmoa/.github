@@ -82,11 +82,11 @@
 ![인프라 아키텍처 이미지](./images/AWS_infra_architecture.png)
 
 <details>
-<summary>아키텍처 구성 요소</summery>
-<table>
-  <tr>
-    <td>네트워크</td>
-    <td>VPC, Public / Private Subnet, Internet Gateway, NAT Gateway</td>
-  </tr>
-</table>
+  <summary>아키텍처 구성 요소</summery>
+  <table>
+    <tr>
+      <td>네트워크</td>
+      <td>VPC, Public / Private Subnet, Internet Gateway, NAT Gateway</td>
+    </tr>
+  </table>
 </details>
