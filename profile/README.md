@@ -231,26 +231,33 @@
 # 5. 💡 ERD설계
 
 <details>
+  
   <summery><strong>v1(초반 설계)</strong></summery>
   ![ERD v1 이미지](./images/ERD_v1.png)
+  
 </details>
 
 <details>
+  
   <summery><strong>v2(MSA 설계 전)</strong></summery>
   ![ERD v2 이미지](./images/ERD_v2.png)
+  
 </details>
 
 <details>
+  
   <summery><strong>v3(MSA 설계 후)</strong></summery>
+  
   📌 user service
-  ![ERD v2 이미지](./images/ERD_v3_user.png)
+  <img src="./images/ERD_v3_user.png">
 
   📌 store service
-  ![ERD v2 이미지](./images/ERD_v3_store.png)
+  <img src="./images/ERD_v3_store.png">
 
   📌 coupon service
-  ![ERD v2 이미지](./images/ERD_v3_coupon.png)
+  <img src="./images/ERD_v3_coupon.png">
 
   📌 notification service
-  ![ERD v2 이미지](./images/ERD_v3_notification.png)
+  <img src="./images/ERD_v3_notification.png">
+  
 </details>
