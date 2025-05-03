@@ -334,7 +334,7 @@
 <tr>
 <td valign="top" width="50%">
 
-<h4>💻 Language<h4><br/>
+<h2>💻 Language<h2><br/>
 <img src="https://github.com/user-attachments/assets/7f579478-f27c-4218-882b-4eb8bc302b32" width="20">
 Java<br/><br/>
 
