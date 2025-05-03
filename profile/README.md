@@ -323,6 +323,58 @@
     - 도구: K6
     - 대상 쿠폰 수: 1000개
     - 동시 요청자 수: 1000명
+- **성능 비교 결과**
+
+<table>
+  <thead>
+    <tr>
+      <th>단계</th>
+      <th>처리 방식</th>
+      <th>응답 시간</th>
+      <th>이전 단계 대비 개선율</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1단계 (기본)</td>
+      <td>동기 처리</td>
+      <td>3분 24.96초</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <td>2단계</td>
+      <td>비동기 처리 (<code>@Async</code>)</td>
+      <td>1.51초</td>
+      <td><b>약 99.3% 개선</b></td>
+    </tr>
+    <tr>
+      <td>3단계</td>
+      <td>비동기 처리 + Bulk Update</td>
+      <td>133ms</td>
+      <td><b>약 91.2% 추가 개선</b></td>
+    </tr>
+    <tr>
+      <td>4단계</td>
+      <td><span style="color: red;">JobRunr</span> + 서버 분리</td>
+      <td>55ms</td>
+      <td><b>약 58.6% 추가 개선</b></td>
+    </tr>
+    <tr>
+      <td colspan="3" style="text-align:right;"><b>전체 개선:</b></td>
+      <td><b>약 99.97%</b></td>
+    </tr>
+  </tbody>
+</table>
+
+![기술적 의사 결정](./images/technical_decision_making_asynchronous.png)
+
+### 5️⃣ 기술 선택 결론
+- **기술 선택 이유**
+    - 실시간성이 중요하지 않으므로 **이메일 방식** 선택
+    - **JobRunr + SQS + 서버 분리**로 유실 없는 안정성 확보
+
+### 6️⃣ 회고
+- 단순 알림도 운영 관점에서 보면 많은 고려가 필요하다는 것을 느낌
 
 </details>
 
