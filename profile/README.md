@@ -823,10 +823,191 @@ ouponmoa는 사용자 맞춤형 쿠폰 추천을 통해 쇼핑 경험을 향상�
 
 <details>
   <summary>🏃 [API 문서화] Spring REST Docs 도입</summary>
+
+### 1️⃣ 개요
+
+---
+
+- 각 마이크로서비스에 REST Docs를 적용
+- 테스트 통과 여부를 기준으로 문서가 생성되므로 **정확하고 신뢰할 수 있는 문서** 확보 가능
+
+### 2️⃣ 기술 도입 배경
+
+---
+
+- 기존 문제
+    - 시간 부족, 빠른 개발 일정 및 할 일이 많아 일단 로직만 작성하고 테스트 코드는 뒤로 미뤄두는 일이 많았음
+    - 문서화는 swagger ui에 의존하거나 별도 정리가 따로 없었음
+    - 프로젝트 후반으로 갈수록 테스트 코드 작성 및 API 잦은 수정으로 명세서 정비가 필요했음
+- RestDocs 도입 이유
+    - **Spring REST Docs는 테스트 기반 문서화**를 강제하게 되어,
+        
+        → **모든 API에 대해 테스트 코드 작성이 자연스럽게 필수화됨**
+        
+    - 동시에 정확한 문서로 읽기 쉽게 생성할 수 있다는 점을 고려하여 REST Docs 도입하게 됨
+
+### 3️⃣ 구현 과정
+
+---
+
+- 구현되어있는 컨트롤러 테스트 코드에  .andDo(Document(…)) 구문 추가.
+- `requestFields`, `responseFields`, `pathParameters`, `queryParameters` 등을 명시해 필드별 문서 작성
+- `asciidoctor`를 활용해 `.adoc` 문서를 HTML로 렌더링
+- API 문서 가독성을 위한 .adoc 파일 작성
+- 각 마이크로 서비스에서 개별 API 문서를 확인 가능하도록 html 파일 push
+
+### 4️⃣ 결과
+
+---
+
+**테스트 코드를 작성하지 않으면 API 문서화를 못하기 때문에 테스트 코드를 작성하게 됨**
+
+- Swagger보다 **가독성과 구성 자유도가 높은 문서 생성 가능**
+- 실제 요청/응답 기반 문서라 **테스트가 깨지면 문서도 안 생성됨 → 신뢰도 보장**
+- 테스트 코드가 필수화 되니까 API 안정성 생김
+
+<table>
+  <thead>
+    <tr>
+      <th>항목</th>
+      <th>사용 전</th>
+      <th>사용 후</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><b>StoreController</b></td>
+      <td>76%</td>
+      <td>100%</td>
+    </tr>
+    <tr>
+      <td><b>StoreService</b></td>
+      <td>92%</td>
+      <td>100%</td>
+    </tr>
+    <tr>
+      <td><b>StoreSubscribeController</b></td>
+      <td>0%</td>
+      <td>100%</td>
+    </tr>
+    <tr>
+      <td><b>StoreSubscribeService</b></td>
+      <td>0%</td>
+      <td>100%</td>
+    </tr>
+  </tbody>
+</table>
+
+![Restdocs 테스트커버리지 비교표](./images/restdocs_coverage_adjusted_reversed.png)
+
+### User 서버 api 문서화 결과 
+![Restdocs User 서버 api 문서화 결과](./images/technical_decision_making_restdocs_1.png)
+
+### Store 서버 api 문서화 결과
+![Restdocs Store 서버 api 문서화 결과](./images/technical_decision_making_restdocs_2.png)
+
+### Coupon 서버 api 문서화 결과
+![Restdocs Coupon 서버 api 문서화 결과](./images/technical_decision_making_restdocs_3.png)
+
+### 5️⃣ 회고
+
+---
+
+- 문서 생성을 넘어, API 테스트와 문서화를 하나의 흐름으로 통합할 수 있었음
+- 문서 작성이 테스트 코드와 결합되다 보니 자연스럽게 테스트 작성 습관도 정착되었고, 팀 전체 코드 품질 향상으로 이어졌음
+- swagger에 비해 좀 더 복잡하고 설정하는데 시간이 걸렸지만 안정적인 API 문서화 방법이라고 생각됨
+- 추후 시간이 된다면 서비스 별로 흩어져 있는 문서를 한 곳에서 통합해 관리하고 싶음
+    - 모든 API 문서를 Gateway 서버나 별도 정적 문서 레포지토리를 통해 한 페이지에서 조회 가능하도록 구성할 계획
+
 </details>
 
 <details>
   <summary>🏃 [인프라 전략] IaC 기반 클라우드 인프라 구성 배경</summary>
+
+### 1️⃣ 개요
+
+---
+
+- Terraform 을 활용하여 AWS 인프라를 IaC로 구성
+- ECS + Fargate 를 통해 Spring Boot 및 AI 서비스를 MSA 환경으로 구성
+- 서비스 원활을 위한 `Route53`, `Cloud Map`, `ALB`, `NAT Gateway`, `Internet Gateway`, `HTTPS` 등 설정
+
+### 2️⃣ 기술 도입 배경
+
+---
+
+- 기존 운영 방식 한계
+    - MSA로 구조화하기 전에는 AWS 콘솔에서 직접 리소스를 생성하고 설정했기 때문에,
+        
+        변경이 번거롭고, 한 사람이 인프라 전체를 파악하고 관리해야 하는 부담이 컸음
+        
+    - 서비스가 MSA 구조로 확장되면서,
+        
+        각 서비스별로 자동 배포, 오토스케일링, 무중단 배포 등 운영 환경에 필요한 조건들이 생김
+        
+    - 과거 EC2 기반 배포는 다음과 같은 한계가 있었음:
+        - 오토 스케일링 설정이 복잡하고
+        - 서버에 직접 접속해 OS 업데이트, 보안 패치, 용량 설정 등을 관리해야 했음
+    - 알림, AI, Gateway 등 여러 서비스가 통신해야 하는 구조로 변화함에 따라
+        
+        DNS 라우팅, 보안 통신, 내부 서비스 검색 등 구체적인 인프라 설계 필요성이 커짐
+        
+- IaC + ECS + Fargate 도입 이유
+    - 직접 리소스를 생성·수정하는 수작업을 줄이고, 팀원 간 코드 기반으로 협업할 수 있도록
+        
+        → Terraform을 사용하여 인프라를 코드로 관리
+        
+    - ECS + Fargate는 서버리스 방식으로,
+        
+        OS 설치나 SSH 접속 등 운영 부담이 없고, AWS가 런타임을 관리해줌
+        
+    - 도커 이미지와 환경 변수만 정의하면 ECS Task로 배포 가능
+    - 오토스케일링이나 무중단 롤링 배포 등의 설정도 EC2보다 간단하게 적용 가능
+    - 결과적으로 MSA 환경에 적합한 유연하고 유지보수 가능한 인프라 구조를 구축할 수 있었음
+
+### 3️⃣ 구현 과정
+
+---
+
+- Terraform(IaC)
+    - MSA 분리 전에 사용하던 Route53을 MSA 분리 후 alb와 연결하는 작업을 제외한 모든 리소스는 Terraform으로 관리
+    - 인프라 생성을 위해 구조를 정확히 하고 시작해야겠다고 생각하여 간단한 아키텍처 그림을 작성했고 그걸 토대로 초기 인프라 생성
+    - vpc.tf, ecs.tf, alb.tf, sg.tf, rds.tf, ecr.tf 등으로 코드 분리하여 초기 인프라 생성
+![iac 인프라 구상도](./images/technical_decision_making_iacinfra.png)
+
+- ECS+Fargate
+    - 각 서비스는 독립된 ECS로 구성하고 fargate 사용
+    - 이를 통해 서버리스 형태로 실행되고 서비스 무중단 배포가 가능해짐(Rolling)
+    - 스케줄러 서버를 제외하고 오토 스케일링 그룹 적용해서 트래픽 변화에 따라 동적 리소스 조절할 수 있게 함
+- Docker+ECR
+    - 각 서비스는 Docker로 이미지화하고 ECR에 저장한 뒤 ECS에서 사용하도록 ECR 레포지토리 각각 생성
+    - CI 과정에서 Github actions를 통해 Docker 이미지 빌드 및 ECR 푸시되도록 workflow 작성
+- ElasticSearch+EC2
+- Route53+HTTPS+ALB
+    - Route53으로 도메인을 관리하고 ALB를 통해 각 ECS 서비스에 라우팅 하도록 설정
+    - HTTPS는 ACM 인증서를 발급받아 외부 트래픽을 HTTPS로 접근 가능하도록 설정
+- CloudMap
+    - ECS 간 내부 통신은 CloudMap을 통해 각 서비스 명을 DNS로 인식할 수 있도록 설정
+    - 초반에는 IP를 사용해서 통신하도록 구현했으나 서버가 재배포 될 때마다 IP가 바뀌고 설정 또한 바꿔야 하는 번거로움으로 인해 설정
+- NAT Gateway, Internet Gateway
+    - 퍼블릭 서브넷에는 ALB, NAT Gateway를 위치시키고, 프라이빗 서브넷에는 DB, Redis, ECS Task 등을 배치
+    - 프라이빗 서브넷에서 외부 통신이 필요한 경우 NAT Gateway를 통해 라우팅
+
+### 4️⃣ 결과
+
+---
+
+- 콘솔에서 직접 하나하나 작업하면 이후 수정하기에도  복잡하고 어떤 것이 설정되었는지 알기 어려웠는데 코드로 관리해서 한 번에 수정 및 확인 가능
+- ECS + Fargate 조합으로 서버 관리 부담 없이 자동화된 배포가 가능해졌고, 무중단 롤링 배포도 실현됨
+- ALB + Route53 + HTTPS 설정을 통해 사용자 트래픽을 안정적이고 안전하게 처리할 수 있게 됨
+
+### 5️⃣ 회고
+
+---
+
+- 처음에는 Terraform, 인프라 작업에 대해 아무것도 모르는 상태에서 시작을 하다보니 어려움이 많았는데 팀원 간에 인프라 구성 검토와 리뷰, 유지보수에 많은 도움이 되었음
+- 아직 인프라 설계가 어렵게 느껴지지만, AWS가 제공하는 서비스의 종류가 매우 많다는 것을 직접 경험하며 깨달음
+  
 </details>
 
 ---
