@@ -135,7 +135,9 @@
   <code>vpc.tf</code>, <code>ecs.tf</code>, <code>alb.tf</code>, <code>sg.tf</code>, <code>rds.tf</code>, <code>sqs.tf</code>, <code>ecr.tf</code> 등
 
 </details>
+
 ---
+
 ## 🧱 애플리케이션 아키텍처
 <table>
   <tr>
