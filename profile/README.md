@@ -80,11 +80,3 @@
 ---
 ## 🗺️ AWS 인프라 아키텍처
 ![인프라 아키텍처 이미지](./images/AWS_infra_architecture.png)
-<details>
-<summery>아키텍처 구성 요소</summery>
-<table>
-  <tr>
-    <td>네트워크</td>
-  </tr>
-</table>
-</details>
