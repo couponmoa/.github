@@ -1069,6 +1069,29 @@ ouponmoa는 사용자 맞춤형 쿠폰 추천을 통해 쇼핑 경험을 향상�
 
 <details>
   <summary>🏃 [CloudFront] 이미지 조회 시 S3, CloudFront 성능 비교</summary>
+
+## 과정 설명
+
+- 클라이언트가 본인 정보 조회 api를 호출하면 이미지 url을 불러옴
+- 이 때 S3에서 직접 로딩하여 가져오는 방식과 CloudFront에서 캐시된 이미지를 가져오는 방식을 비교
+
+---
+
+## 성능 비교
+| 지표 | S3 | Cloudfront | 차이 및 해석 |
+| --- | --- | --- | --- |
+| **총 요청 수** | 8200 req | 9211 req | **+12.3%** 더 많은 요청 처리 |
+| **TTFB < 200ms 성공률** | 89% (7370/8200) | 98% (9049/9211) | **+9%** 200ms 미만 응답 비율 |
+| **Avg Duration** | 132.42ms | 31.26ms | **-76.4%** 평균 응답 시간 **감소** |
+| **Data received** | 197MB | 220MB | 더 많은 데이터 처리 |
+| **TPS** | 738 | 837 |  tps 증가(sleep(1)을 주기 때문에 1초마다 1번만 요청) |
+
+- S3와 Cloudfront에서 각각 동일한 이미지를 VUser 1000명이 10s동안 조회하며 이를 K6로 확인한 결과
+
+![배너 이미지](./images/performance_comparison_SSE_2.png)
+
+- TPS 결과. Cloudfront의 처리량이 더 높은 것을 확인
+
 </details>
 
 <details>
