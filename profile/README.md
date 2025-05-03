@@ -334,12 +334,13 @@
 <tr>
 <td valign="top" width="50%">
 
-<span style="background-color:#f2f2f2;">Language</span>
+<b>🧠 Language</b><br/>
 <img src="https://github.com/user-attachments/assets/7f579478-f27c-4218-882b-4eb8bc302b32" width="20">
 Java<br/><br/>
 
+<hr style="margin:4px 0;">
+
 <b>👨‍💻 Backend</b><br/>
- 
 <img src="https://github.com/user-attachments/assets/9c525a7b-97fa-496e-b6f0-76406da17364" width="20">
 Spring<br/>
 <img src="https://github.com/user-attachments/assets/d903bb42-e1e5-4221-a0a4-6f4bd5b30edd" width="20">
