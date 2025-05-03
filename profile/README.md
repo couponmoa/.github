@@ -71,6 +71,7 @@
 - 로그인 및 권한 분리 (사업자 / 일반 사용자)
 - 회원 프로필 관리
 - 쿠폰 상태 자동 변경 (만료 처리 등)
+
 # 4. 🖥️ System Architecture
 
 ## 아키텍처 개요
@@ -132,5 +133,70 @@
 
 - 기능별 분리:  
   <code>vpc.tf</code>, <code>ecs.tf</code>, <code>alb.tf</code>, <code>sg.tf</code>, <code>rds.tf</code>, <code>sqs.tf</code>, <code>ecr.tf</code> 등
+
+</details>
+---
+## 🧱 애플리케이션 아키텍처
+<table>
+  <tr>
+    <td><b>서비스명</b></td>
+    <td><b>역할</b></td>
+  </tr>
+  <tr>
+    <td><b>Spring Cloud Gateway</b></td>
+    <td>클라이언트 요청을 내부 서비스로 라우팅, 인증 및 인가</td>
+  </tr>
+  <tr>
+    <td><b>User Service</b></td>
+    <td>회원가입, 로그인, 사용자 정보 관리</td>
+  </tr>
+  <tr>
+    <td><b>Store Service</b></td>
+    <td>매장 생성, 수정, 조회</td>
+  </tr>
+  <tr>
+    <td><b>Coupon Service</b></td>
+    <td>쿠폰 발행, 발급, 조회, 사용</td>
+  </tr>
+  <tr>
+    <td><b>Notification Service</b></td>
+    <td>쿠폰 생성, 발급, 만료 알림 전송</td>
+  </tr>
+  <tr>
+    <td><b>Batch Service</b></td>
+    <td>쿠폰 사용량 집계 등 배치 작업</td>
+  </tr>
+  <tr>
+    <td><b>AI Service</b></td>
+    <td>AI 기반 추천 쿠폰 ID 생성</td>
+  </tr>
+</table>
+
+<details>
+<summary><strong>서비스 간 통신 방식</strong></summary>
+
+서비스 간 통신은 **gRPC** 또는 **비동기 메시지 큐(AWS SQS)**를 통해 이루어집니다.
+
+- **동기 처리**가 필요한 경우 성능이 뛰어난 **gRPC** 방식으로 서비스를 호출하고,
+- **비동기 처리**가 필요한 이벤트성 작업은 **SQS Queue**를 통해 안정적으로 전달됩니다.
+
+**📶 예시**
+<table>
+  <tr>
+    <td><b>통신 주체</b></td>
+    <td><b>방식</b></td>
+    <td><b>설명</b></td>
+  </tr>
+  <tr>
+    <td>Coupon Service → Store Service</td>
+    <td>gRPC</td>
+    <td>쿠폰 생성 시 매장 유효성 확인</td>
+  </tr>
+  <tr>
+    <td>Coupon Service → Notification Service</td>
+    <td>SQS</td>
+    <td>쿠폰 발급 완료 후 알림 전송</td>
+  </tr>
+</table>
 
 </details>
