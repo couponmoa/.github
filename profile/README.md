@@ -334,13 +334,12 @@
 <tr>
 <td valign="top" width="50%">
 
-<b>💻 Language<b><br/>
-<hr style="margin:4px 0;">
+<span style="background-color:#f2f2f2;">Language</span>
 <img src="https://github.com/user-attachments/assets/7f579478-f27c-4218-882b-4eb8bc302b32" width="20">
 Java<br/><br/>
 
 <b>👨‍💻 Backend</b><br/>
-<hr style="margin:4px 0;">
+ 
 <img src="https://github.com/user-attachments/assets/9c525a7b-97fa-496e-b6f0-76406da17364" width="20">
 Spring<br/>
 <img src="https://github.com/user-attachments/assets/d903bb42-e1e5-4221-a0a4-6f4bd5b30edd" width="20">
@@ -353,7 +352,7 @@ Spring WebFlux<br/>
 QueryDSL<br/><br/>
 
 <b>💾 Database</b><br/>
-<hr style="margin:4px 0;">
+ 
 <img src="https://github.com/user-attachments/assets/60d30203-d078-4c8e-bb2f-ce5ef7f0c8f5" width="20">
 MySQL<br/>
 <img src="https://github.com/user-attachments/assets/68df185a-c4bd-42e0-b13d-dc8b2a85fb79" width="20">
@@ -367,25 +366,25 @@ AWS RDS<br/><br/>
 
 
 <b>📧 Email</b><br/>
-<hr style="margin:4px 0;">
+ 
 • JavaMailSender<br/><br/>
 
 <b>📈 Monitoring</b><br/>
-<hr style="margin:4px 0;">
+ 
 • Spring Actuator<br/>
 • Prometheus<br/>
 • Grafana<br/>
 • AWS CloudWatch<br/><br/>
 
 <b>🤝 Collaboration</b><br/>
-<hr style="margin:4px 0;">
+ 
 • GitHub<br/>
 • Slack<br/>
 • Notion<br/>
 • K8 Cloud<br/><br/>
 
 <b>🧪 Test</b><br/>
-<hr style="margin:4px 0;">
+ 
 • Spring REST Docs<br/>
 • Postman<br/>
 • Swagger<br/>
@@ -396,16 +395,16 @@ AWS RDS<br/><br/>
 <td valign="top" width="50%">
 
 <b>🧠 IDE</b><br/>
-<hr style="margin:4px 0;">
+ 
 • IntelliJ IDEA<br/><br/>
 
 <b>🔐 Security</b><br/>
-<hr style="margin:4px 0;">
+ 
 • JWT<br/>
 • Spring Security<br/><br/>
 
 <b>🔁 Batch</b><br/>
-<hr style="margin:4px 0;">
+ 
 • Spring Batch<br/><br/>
 
 <b>📡 Inter-Service Communication</b><br/>
