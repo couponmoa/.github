@@ -345,11 +345,10 @@ Spring<br/>
 Spring Boot<br/>
 <img src="https://github.com/user-attachments/assets/d903bb42-e1e5-4221-a0a4-6f4bd5b30edd" width="20">
 Spring Data JPA<br/>
-<img src="https://github.com/user-attachments/assets/ca5af6c8-5db2-4f69-873d-ac6156ec650a" width="20">
+<img src="https://github.com/user-attachments/assets/6b6bf960-df68-4fac-ba6c-2f932b102fb0" width="20">
 Spring WebFlux<br/>
-<img src="https://github.com/user-attachments/assets/3983037b-19d0-42f7-a3f4-bfcd2c2772c2" width="20">
+<img src="https://github.com/user-attachments/assets/074a6663-6d96-4e39-99cd-db9cf69a8f08" width="20">
 QueryDSL<br/><br/>
-<img src="https://github.com/user-attachments/assets/60f48b0e-9808-4fa7-b62b-fdc530a41c64" width="20">
 
 <b>💾 Database</b><br/>
 <img src="https://github.com/user-attachments/assets/60d30203-d078-4c8e-bb2f-ce5ef7f0c8f5" width="20">
