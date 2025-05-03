@@ -410,40 +410,60 @@
         Spring Security<br/><br/>
       <hr style="margin:4px 0;"/>
       <b>⏰ Batch</b><br/>
-        <img src="https://github.com/user-attachments/assets/1d10bace-7528-45d3-8d9d-0e9c4c305bad" width="20">
+        <img src="https://github.com/user-attachments/assets/32d5c547-0e2e-40ff-9f4c-4367f7a35072" width="20">
         Spring Batch<br/><br/>
       <hr style="margin:4px 0;"/>
       <b>✉️ Inter-Service Communication</b><br/>
         <img src="https://github.com/user-attachments/assets/a64f8a72-cbe9-4340-9a32-78db0e3ed970" width="20">
         AWS SQS<br/>
-        <img src="https://github.com/user-attachments/assets/ee1d9dea-ac86-4929-af26-7235a5afe7d2" width="20">
+        <img src="https://github.com/user-attachments/assets/6a94ecdd-41a6-4562-8c4e-236757fbd173" width="20">
         gRPC<br/><br/>
       <hr style="margin:4px 0;"/>
       <b>🤖 AI</b><br/>
-        <img src="https://github.com/user-attachments/assets/" width="20">
+        <img src="https://github.com/user-attachments/assets/436ff58c-ae62-457a-bda7-fc012310cc20" width="20">
         Google Gemini API<br/>
-        <img src="https://github.com/user-attachments/assets/" width="20">
+        <img src="https://github.com/user-attachments/assets/413a0610-9fc1-4ba4-880b-0fac401e9171" width="20">
         Spring AI<br/><br/>
       <hr style="margin:4px 0;"/>
       <b>✈️ CI/CD</b><br/>
-        <img src="https://github.com/user-attachments/assets/" width="20">
+        <img src="https://github.com/user-attachments/assets/c3e869c7-eb77-4038-9ae4-4f4e47fb6258" width="20">
         GitHub Actions<br/>
-        <img src="https://github.com/user-attachments/assets/" width="20">
+        <img src="https://github.com/user-attachments/assets/9ca85329-fd21-4f17-94cb-15b82444c5d6" width="20">
         Docker<br/><br/>
       <hr style="margin:4px 0;"/>
       <b>☁️ Infra</b><br/>
-        <img src="https://github.com/user-attachments/assets/" width="20">
+        <img src="https://github.com/user-attachments/assets/b84694c3-a527-4c79-9160-88eea4ae07c4" width="20">
         Terraform<br/>
-        <img src="https://github.com/user-attachments/assets/" width="20">
-        AWS ECS, ECR, Fargate, EC2<br/>
-        <img src="https://github.com/user-attachments/assets/" width="20">
-        AWS Route53, S3, ALB<br/>
-        <img src="https://github.com/user-attachments/assets/" width="20">
-        Internet Gateway, NAT Gateway<br/>
-        <img src="https://github.com/user-attachments/assets/" width="20">
-        AWS IAM, Lambda, EventBridge<br/>
-        <img src="https://github.com/user-attachments/assets/" width="20">
-        Cloud Map, Certificate Manager<br/><br/>
+        <img src="https://github.com/user-attachments/assets/6fec3049-6d04-4d0e-a600-e1bca88c426d" width="20">
+        AWS ECR<br/>
+        <img src="https://github.com/user-attachments/assets/ff0128e3-fb55-4e52-92a8-7545266043ae" width="20">
+        AWS ECS<br/>
+        <img src="https://github.com/user-attachments/assets/a78f6ec1-9820-4870-a92b-c14615c1c2ab" width="20">
+        AWS Fargate<br/>
+        <img src="https://github.com/user-attachments/assets/42316717-cddd-41e2-8cd0-ca4603c8959c" width="20">
+        AWS EC2<br/>
+        <img src="https://github.com/user-attachments/assets/7af1a9d3-9059-41b9-bb99-ead69a9b6295" width="20">
+        AWS S3<br/>
+        <img src="https://github.com/user-attachments/assets/be36b5b8-07b5-4f0b-a066-249cdb080c82" width="20">
+        AWS Route53<br/>
+        <img src="https://github.com/user-attachments/assets/ee7a5e64-94c2-4307-a821-a250a505453c" width="20">
+        AWS CloudFront<br/>
+        <img src="https://github.com/user-attachments/assets/e562c5ef-b4df-42ba-9f95-4a1c4f1e6684" width="20">
+        AWS Lambda<br/>
+        <img src="https://github.com/user-attachments/assets/fbc722fa-f789-496d-ab19-f388133ca702" width="20">
+        AWS EventBridge<br/>
+        <img src="https://github.com/user-attachments/assets/77b7fa50-7d31-4c89-af3c-538df79691fe" width="20">
+        Cloud Map<br/>
+        <img src="https://github.com/user-attachments/assets/9079c1a6-0726-4403-90f1-c87c779096d1" width="20">
+        AWS ALB<br/>
+        <img src="https://github.com/user-attachments/assets/21914b42-f5fc-46d7-8dba-9b50005366ee" width="20">
+        AWS NAT Gateway<br/>
+        <img src="https://github.com/user-attachments/assets/77434834-d360-4d0d-8fb2-2bb1a179fa0b" width="20">
+        Internet Gateway<br/>
+        <img src="https://github.com/user-attachments/assets/878c936f-a6b9-46a7-85cc-8f30be6fbc57" width="20">
+        AWS IAM<br/>
+        <img src="https://github.com/user-attachments/assets/6097a120-c893-4f57-8617-3e4a4defd257" width="20">
+        AWS Certificate Manager<br/>
       <hr style="margin:4px 0;"/>
     </td>
   </tr>
