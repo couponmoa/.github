@@ -1,4 +1,4 @@
-![배너 이미지](./images/couponmoa_banner.png)
+![image](https://github.com/user-attachments/assets/ebc52815-fbab-40f5-b3e7-4cb275e96398)![배너 이미지](./images/couponmoa_banner.png)
 # 🎟️ 구독 기반 실시간 쿠폰 뷰어 서비스
 # 1. 팀원 소개
 <table>
@@ -331,104 +331,134 @@
 # 9. 🛠 기술 스택
 
 <table>
-<tr>
-<td valign="top" width="50%">
-<div style="background-color: #f7f7f7; padding: 6px 12px; border-radius: 6px; font-weight: bold; width: fit-content;">🧠 Language
-</div>
-<img src="https://github.com/user-attachments/assets/7f579478-f27c-4218-882b-4eb8bc302b32" width="20">
-Java<br/><br/>
+  <tr>
+    <td valign="top" width="50%">
+      <b>🧠 Language</b><br/>
+        <img src="https://github.com/user-attachments/assets/7f579478-f27c-4218-882b-4eb8bc302b32" width="20">
+        Java<br/><br/>
+      <hr style="margin:4px 0;">
+      
+      <b>👨‍💻 Backend</b><br/>
+        <img src="https://github.com/user-attachments/assets/9c525a7b-97fa-496e-b6f0-76406da17364" width="20">
+        Spring<br/>
+        <img src="https://github.com/user-attachments/assets/d903bb42-e1e5-4221-a0a4-6f4bd5b30edd" width="20">
+        Spring Boot<br/>
+        <img src="https://github.com/user-attachments/assets/d903bb42-e1e5-4221-a0a4-6f4bd5b30edd" width="20">
+        Spring Data JPA<br/>
+        <img src="https://github.com/user-attachments/assets/6b6bf960-df68-4fac-ba6c-2f932b102fb0" width="20">
+        Spring WebFlux<br/>
+        <img src="https://github.com/user-attachments/assets/074a6663-6d96-4e39-99cd-db9cf69a8f08" width="20">
+        QueryDSL<br/><br/>
+      <hr style="margin:4px 0;">
+      
+      <b>💾 Database</b><br/>
+        <img src="https://github.com/user-attachments/assets/60d30203-d078-4c8e-bb2f-ce5ef7f0c8f5" width="20">
+        MySQL<br/>
+        <img src="https://github.com/user-attachments/assets/68df185a-c4bd-42e0-b13d-dc8b2a85fb79" width="20">
+        Redis<br/>
+        <img src="https://github.com/user-attachments/assets/dce85062-cc7f-417b-8c65-68a33b67197a" width="20">
+        Elasticsearch<br/>
+        <img src="https://github.com/user-attachments/assets/a35ff5bf-627e-41cf-9493-cc2f6363a255" width="20">
+        AWS ElastiCache<br/>
+        <img src="https://github.com/user-attachments/assets/06b5d7ad-e6af-4c21-ac05-3b8ea44427fb" width="20">
+        AWS RDS<br/><br/>
+      <hr style="margin:4px 0;">
+      
+      <b>📧 Email</b><br/>
+        <img src="https://github.com/user-attachments/assets/c3a24ead-982e-443c-affa-8d5b3f10a6f4" width="20">
+        JavaMailSender<br/><br/>
+      <hr style="margin:4px 0;">
+        
+      <b>📈 Monitoring</b><br/>
+        <img src="https://github.com/user-attachments/assets/592a5e38-ada1-4179-89f3-7827f2008b5d" width="20">
+        Spring Actuator<br/>
+        <img src="https://github.com/user-attachments/assets/47d7f66a-5d55-44a4-b4b4-e167ba3982fb" width="20">
+        Prometheus<br/>
+        <img src="https://github.com/user-attachments/assets/15babcd1-8774-4ec3-b996-c774eff08006" width="20">
+        Grafana<br/>
+        <img src="https://github.com/user-attachments/assets/8f67e9eb-0f56-4717-8606-ad6559fc284a" width="20">
+        AWS CloudWatch<br/><br/>
+      <hr style="margin:4px 0;">
+      
+      <b>👥 Collaboration</b><br/>
+        <img src="https://github.com/user-attachments/assets/4c2545a7-e860-4633-98c9-0f21de57b642" width="20">
+        GitHub<br/>
+        <img src="https://github.com/user-attachments/assets/ab197765-c786-4b53-89eb-bb568604f9b1" width="20">
+        Slack<br/>
+        <img src="https://github.com/user-attachments/assets/37046169-d290-4cb6-b0a2-4cc95f033fb6" width="20">
+        Notion<br/>
+        <img src="https://github.com/user-attachments/assets/039d9816-7763-48b6-ba1b-443b3a1bfa62" width="20">
+        ERD Cloud<br/><br/>
+      <hr style="margin:4px 0;">
+      
+      <b>🏁 Test</b><br/>
+        <img src="https://github.com/user-attachments/assets/" width="20">
+        Spring REST Docs<br/>
+        <img src="https://github.com/user-attachments/assets/" width="20">
+        Postman<br/>
+        <img src="https://github.com/user-attachments/assets/" width="20">
+        Swagger<br/>
+        <img src="https://github.com/user-attachments/assets/" width="20">
+        JMeter
+        <img src="https://github.com/user-attachments/assets/" width="20">
+        K6<br/><br/>
+      <hr style="margin:4px 0;">
+    </td>
 
-<hr style="margin:4px 0;">
-
-<b>👨‍💻 Backend</b><br/>
-<img src="https://github.com/user-attachments/assets/9c525a7b-97fa-496e-b6f0-76406da17364" width="20">
-Spring<br/>
-<img src="https://github.com/user-attachments/assets/d903bb42-e1e5-4221-a0a4-6f4bd5b30edd" width="20">
-Spring Boot<br/>
-<img src="https://github.com/user-attachments/assets/d903bb42-e1e5-4221-a0a4-6f4bd5b30edd" width="20">
-Spring Data JPA<br/>
-<img src="https://github.com/user-attachments/assets/6b6bf960-df68-4fac-ba6c-2f932b102fb0" width="20">
-Spring WebFlux<br/>
-<img src="https://github.com/user-attachments/assets/074a6663-6d96-4e39-99cd-db9cf69a8f08" width="20">
-QueryDSL<br/><br/>
-
-<b>💾 Database</b><br/>
- 
-<img src="https://github.com/user-attachments/assets/60d30203-d078-4c8e-bb2f-ce5ef7f0c8f5" width="20">
-MySQL<br/>
-<img src="https://github.com/user-attachments/assets/68df185a-c4bd-42e0-b13d-dc8b2a85fb79" width="20">
-Redis<br/>
-<img src="https://github.com/user-attachments/assets/dce85062-cc7f-417b-8c65-68a33b67197a" width="20">
-Elasticsearch<br/>
-<img src="https://github.com/user-attachments/assets/a35ff5bf-627e-41cf-9493-cc2f6363a255" width="20">
-AWS ElastiCache<br/>
-<img src="https://github.com/user-attachments/assets/06b5d7ad-e6af-4c21-ac05-3b8ea44427fb" width="20">
-AWS RDS<br/><br/>
-
-
-<b>📧 Email</b><br/>
- 
-• JavaMailSender<br/><br/>
-
-<b>📈 Monitoring</b><br/>
- 
-• Spring Actuator<br/>
-• Prometheus<br/>
-• Grafana<br/>
-• AWS CloudWatch<br/><br/>
-
-<b>🤝 Collaboration</b><br/>
- 
-• GitHub<br/>
-• Slack<br/>
-• Notion<br/>
-• K8 Cloud<br/><br/>
-
-<b>🧪 Test</b><br/>
- 
-• Spring REST Docs<br/>
-• Postman<br/>
-• Swagger<br/>
-• K6<br/><br/>
-
-</td>
-
-<td valign="top" width="50%">
-
-<b>🧠 IDE</b><br/>
- 
-• IntelliJ IDEA<br/><br/>
-
-<b>🔐 Security</b><br/>
- 
-• JWT<br/>
-• Spring Security<br/><br/>
-
-<b>🔁 Batch</b><br/>
- 
-• Spring Batch<br/><br/>
-
-<b>📡 Inter-Service Communication</b><br/>
-• AWS SQS<br/>
-• gRPC<br/><br/>
-
-<b>🧠 AI</b><br/>
-• Google Gemini API<br/>
-• Spring AI<br/><br/>
-
-<b>⚙️ CI/CD</b><br/>
-• GitHub Actions<br/>
-• Docker<br/><br/>
-
-<b>🌐 Infra</b><br/>
-• Terraform<br/>
-• AWS ECS, ECR, Fargate, EC2<br/>
-• AWS Route53, S3, ALB<br/>
-• Internet Gateway, NAT Gateway<br/>
-• AWS IAM, Lambda, EventBridge<br/>
-• Cloud Map, Certificate Manager<br/><br/>
-
-</td>
-</tr>
+    <td valign="top" width="50%">
+      <b>🌐 IDE</b><br/>
+        <img src="https://github.com/user-attachments/assets/" width="20">
+        IntelliJ IDEA<br/><br/>
+      <hr style="margin:4px 0;">
+      
+      <b>🔐 Security</b><br/>
+        <img src="https://github.com/user-attachments/assets/" width="20">
+        JWT<br/>
+        <img src="https://github.com/user-attachments/assets/" width="20">
+        Spring Security<br/><br/>
+      <hr style="margin:4px 0;">
+      
+      <b>⏰ Batch</b><br/>
+        <img src="https://github.com/user-attachments/assets/" width="20">
+        Spring Batch<br/><br/>
+      <hr style="margin:4px 0;">
+      
+      <b>✉️ Inter-Service Communication</b><br/>
+        <img src="https://github.com/user-attachments/assets/" width="20">
+        AWS SQS<br/>
+        <img src="https://github.com/user-attachments/assets/" width="20">
+        gRPC<br/><br/>
+      <hr style="margin:4px 0;">
+      
+      <b>🤖 AI</b><br/>
+        <img src="https://github.com/user-attachments/assets/" width="20">
+        Google Gemini API<br/>
+        <img src="https://github.com/user-attachments/assets/" width="20">
+        Spring AI<br/><br/>
+      <hr style="margin:4px 0;">
+      
+      <b>✈️ CI/CD</b><br/>
+        <img src="https://github.com/user-attachments/assets/" width="20">
+        GitHub Actions<br/>
+        <img src="https://github.com/user-attachments/assets/" width="20">
+        Docker<br/><br/>
+      <hr style="margin:4px 0;">
+      
+      <b>☁️ Infra</b><br/>
+        <img src="https://github.com/user-attachments/assets/" width="20">
+        Terraform<br/>
+        <img src="https://github.com/user-attachments/assets/" width="20">
+        AWS ECS, ECR, Fargate, EC2<br/>
+        <img src="https://github.com/user-attachments/assets/" width="20">
+        AWS Route53, S3, ALB<br/>
+        <img src="https://github.com/user-attachments/assets/" width="20">
+        Internet Gateway, NAT Gateway<br/>
+        <img src="https://github.com/user-attachments/assets/" width="20">
+        AWS IAM, Lambda, EventBridge<br/>
+        <img src="https://github.com/user-attachments/assets/" width="20">
+        Cloud Map, Certificate Manager<br/><br/>
+      <hr style="margin:4px 0;">
+    </td>
+  </tr>
 </table>
 
