@@ -1989,10 +1989,6 @@ ElasticSearch 기반 쿠폰 검색 기능은 Couponmoa 플랫폼의 성능과 �
         AWS Route53<br/>
         <img src="https://github.com/user-attachments/assets/ee7a5e64-94c2-4307-a821-a250a505453c" width="20">
         AWS CloudFront<br/>
-        <img src="https://github.com/user-attachments/assets/e562c5ef-b4df-42ba-9f95-4a1c4f1e6684" width="20">
-        AWS Lambda<br/>
-        <img src="https://github.com/user-attachments/assets/fbc722fa-f789-496d-ab19-f388133ca702" width="20">
-        AWS EventBridge<br/>
         <img src="https://github.com/user-attachments/assets/77b7fa50-7d31-4c89-af3c-538df79691fe" width="20">
         Cloud Map<br/>
         <img src="https://github.com/user-attachments/assets/9079c1a6-0726-4403-90f1-c87c779096d1" width="20">
