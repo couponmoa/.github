@@ -5,7 +5,7 @@
   <tr>
     <td width="200" align="center" valign="top">
       <img src="./images/profile_sejin.jpg" width="100%" style="border-radius:10px;"><br/>
-      <b>박세진</b><br/><br/>
+      <b><a href="https://github.com/plusmate" target="_blank">박세진</a></b><br/>
       <br>
       <span style="color: orange;">🪪 팀장</span><br/>
       📌 가게 및 쿠폰 구독 기능 구현<br/>
