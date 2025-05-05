@@ -15,7 +15,7 @@
     </td>
     <td width="200" align="center" valign="top">
       <img src="./images/profile_myeongje.jpg" width="100%" style="border-radius:10px;"><br/>
-      <b>오명제</b><br/><br/>
+      <b><a href="https://github.com/ohmyeongje" target="_blank">오명제</a></b><br/>
       <br>
       <span style="color: red;">🧱 부팀장</span><br/>
       📌 가게 CRUD 구현<br/>
@@ -24,7 +24,7 @@
     </td>
     <td width="200" align="center" valign="top">
       <img src="./images/profile_nayeon.png" width="100%" style="border-radius:10px;"><br/>
-      <b>김나연</b><br/><br/>
+      <b><a href="https://github.com/kny5579" target="_blank">김나연</a></b><br/>
       <br>
       <span style="color: blue;">💡 팀원</span><br/>
       📌 사용자 CRUD 및 인증 / 인가 구현<br/>
@@ -34,7 +34,7 @@
     </td>
     <td width="200" align="center" valign="top">
       <img src="./images/profile_boyeon.jpg" width="100%" style="border-radius:10px;"><br/>
-      <b>이보연</b><br/><br/>
+      <b><a href="https://github.com/iboyeon0816" target="_blank">이보연</a></b><br/>
       <br>
       <span style="color: blue;">💡 팀원</span><br/>
       📌 쿠폰 발급 및 발급 내역 관리 기능 구현<br/>
@@ -44,7 +44,7 @@
     </td>
         <td width="200" align="center" valign="top">
       <img src="./images/profile_hojun.jpg" width="100%" style="border-radius:10px;"><br/>
-      <b>권호준</b><br/><br/>
+      <b><a href="https://github.com/BerensLeap" target="_blank">권호준</a></b><br/>
       <br>
       <span style="color: blue;">💡 팀원</span><br/>
       📌 쿠폰 CRUD 구현<br/>
