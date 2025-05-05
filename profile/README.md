@@ -86,7 +86,7 @@
 
 ---
 ## 🗺️ AWS 인프라 아키텍처
-![인프라 아키텍처 이미지](./images/AWS_infra_architecture.png)
+![인프라 아키텍처 이미지](./images/AWS_infra_architecture_editted.png)
 
 <details>
 <summary><strong>📦 아키텍처 구성 요소</strong></summary>
