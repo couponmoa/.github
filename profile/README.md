@@ -43,7 +43,7 @@
       📌 Notification Service 분리
     </td>
         <td width="200" align="center" valign="top">
-      <img src="./images/profile_hojun.png" width="100%" style="border-radius:10px;"><br/>
+      <img src="./images/profile_hojun.jpg" width="100%" style="border-radius:10px;"><br/>
       <b>권호준</b><br/><br/>
       <br>
       <span style="color: blue;">💡 팀원</span><br/>
