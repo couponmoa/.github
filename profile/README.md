@@ -1963,8 +1963,6 @@ ElasticSearch 기반 쿠폰 검색 기능은 Couponmoa 플랫폼의 성능과 �
       <b>🤖 AI</b><br/><br/>
         <img src="https://github.com/user-attachments/assets/436ff58c-ae62-457a-bda7-fc012310cc20" width="20">
         Google Gemini API<br/>
-        <img src="https://github.com/user-attachments/assets/413a0610-9fc1-4ba4-880b-0fac401e9171" width="20">
-        Spring AI<br/>
       <hr style="margin:4px 0;"/>
       <b>✈️ CI/CD</b><br/><br/>
         <img src="https://github.com/user-attachments/assets/c3e869c7-eb77-4038-9ae4-4f4e47fb6258" width="20">
